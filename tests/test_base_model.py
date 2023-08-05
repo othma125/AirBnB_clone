@@ -21,7 +21,7 @@ class TestBaseMethods(TestCase):
         self.assertEqual(type(self.Model.id), str)
         self.assertTrue(self.Model.updated_at >= self.Model.created_at)
 
-    def test_base_doc(self):
+    def test_base_model_doc(self):
         """
         Tests for the doc string
         """
