@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Module that contains class Base """
-import time
+# import time
 from datetime import datetime
 from uuid import uuid4
 
