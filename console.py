@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
+import models
 
 
 class HBNBCommand(Cmd):
@@ -14,6 +15,30 @@ class HBNBCommand(Cmd):
     def do_quit(self, line):
         """ quit command"""
         return self.do_EOF(line)
+
+    def do_create(self, line):
+        """ create command"""
+        if not line:
+            print('** class name missing **')
+            return
+        if all(line != key for key in models.classes_dict.keys()):
+            print('** class doesn\'t exit **')
+            return
+        print(line)
+
+    def do_show(self, line):
+        """ create command"""
+        if not line:
+            print('** class name missing **')
+            return
+        class_name, identifier = line.split()
+        if all(class_name != key for key in models.classes_dict.keys()):
+            print('** class doesn\'t exit **')
+            return
+        if not identifier:
+            print('** instance id missing **')
+            return
+        print(line)
 
 
 if __name__ == '__main__':
