@@ -3,5 +3,6 @@
 
 
 class FileStorage:
+    """ FileStorage class """
     __file_path: str
     __objects: dict = {}
