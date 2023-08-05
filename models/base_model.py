@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module that contains class Base """
+""" Module that contains class BaseModel """
 
 from datetime import datetime
 from uuid import uuid4
@@ -10,7 +10,7 @@ class BaseModel:
 
     def __init__(self, *args, ** my_dict):
         """
-
+        constructor
         :param args:
         :type args:
         :param kwargs:
