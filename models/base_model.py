@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Module that contains class Base """
-# import time
+
 from datetime import datetime
 from uuid import uuid4
 
@@ -8,21 +8,38 @@ from uuid import uuid4
 class BaseModel:
     """ Base class """
 
-    def __init__(self):
-        """ constructor """
-        self.id: str = str(uuid4())
-        self.created_at: datetime = datetime.now()
-        self.updated_at: datetime = self.created_at
+    def __init__(self, *args, ** my_dict):
+        """
 
-    def __str__(self):
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
+        if my_dict:
+            for key, value in my_dict.items():
+                if key == 'created_at':
+                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                elif key == 'updated_at':
+                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                elif key == '__class__':
+                    continue
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id: str = str(uuid4())
+            self.created_at: datetime = datetime.now()
+            self.updated_at: datetime = self.created_at
+
+    def __str__(self) -> str:
         """ to string """
         return f"[{self.__class__.__name__} ({self.id}) {self.__dict__}]"
 
-    def save(self):
+    def save(self) -> None:
         """ update """
         self.updated_at = datetime.now()
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """ return dic """
         my_dict = self.__dict__.copy()
         my_dict['__class__']: str = self.__class__.__name__
@@ -30,14 +47,16 @@ class BaseModel:
         my_dict['updated_at']: str = str(self.updated_at.isoformat())
         return my_dict
 
-
 # model = BaseModel()
 # model.name: str = 'first name'
 # model.my_number = 98
-# print(model)
+# # print(model)
+# import time
 # time.sleep(2)
 # model.save()
 # tojson = model.to_dict()
 # print(tojson)
-# for key in tojson.keys():
-#     print(f'{key} {type(tojson[key])}')
+# # for key in tojson.keys():
+# #     print(f'{key} {type(tojson[key])}')
+# model = BaseModel(**tojson)
+# print(model.to_dict())
