@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Module that contains class Base """
-
+import time
 from datetime import datetime
 from uuid import uuid4
 
@@ -24,18 +24,20 @@ class BaseModel:
 
     def to_dict(self):
         """ return dic """
-        dict = self.__dict__.copy()
-        dict['__class__']: str = self.__class__.__name__
-        dict['created_at']: str = str(self.created_at.isoformat())
-        dict['updated_at']: str = str(self.updated_at.isoformat())
-        return dict
+        my_dict = self.__dict__.copy()
+        my_dict['__class__']: str = self.__class__.__name__
+        my_dict['created_at']: str = str(self.created_at.isoformat())
+        my_dict['updated_at']: str = str(self.updated_at.isoformat())
+        return my_dict
 
-model = BaseModel()
-model.name:str = 'first name'
-model.my_number = 98
-print(model)
-model.save()
-tojson = model.to_dict()
-print(tojson)
-for key in tojson.keys():
-    print(f'{key} {type(tojson[key])}')
+
+# model = BaseModel()
+# model.name: str = 'first name'
+# model.my_number = 98
+# print(model)
+# time.sleep(2)
+# model.save()
+# tojson = model.to_dict()
+# print(tojson)
+# for key in tojson.keys():
+#     print(f'{key} {type(tojson[key])}')
