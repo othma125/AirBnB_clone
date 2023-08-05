@@ -34,5 +34,5 @@ class TestBaseMethods(TestCase):
         self.assertFalse(self.Model.to_dict.__doc__ == '')
         self.assertIsNotNone(self.Model.save)
         self.assertFalse(self.Model.save.__doc__ == '')
-        # self.assertIsNotNone(base_model.__init__.__doc__)
-        # self.assertFalse(base_model.__init__.__doc__ == '')
+        # self.assertIsNotNone(self.Model.__init__.__doc__)
+        # self.assertFalse(self.Model.__init__.__doc__ == '')
