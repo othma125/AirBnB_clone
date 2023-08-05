@@ -18,10 +18,9 @@ class BaseModel:
         """
         if my_dict:
             for key, value in my_dict.items():
-                if key == 'created_at':
-                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
-                elif key == 'updated_at':
-                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                if key == 'created_at' or key == 'updated_at':
+                    t = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, key, t)
                 elif key == '__class__':
                     continue
                 else:
