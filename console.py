@@ -85,6 +85,10 @@ class HBNBCommand(Cmd):
         res = []
         if line:
             class_name, = line.split()
+            from models import classes_dict
+            if all(class_name != key for key in classes_dict.keys()):
+                print('** class doesn\'t exit **')
+                return
             for key, obj in storage.all().values():
                 name, = key.split()
                 if name == class_name:
@@ -94,6 +98,19 @@ class HBNBCommand(Cmd):
                 res.append(str(obj))
         print(res)
 
+    def do_update(self, line):
+        """ update command"""
+        if not line:
+            print('** class name missing **')
+            return
+        class_name, identifier = line.split()
+        from models import classes_dict
+        if all(class_name != key for key in classes_dict.keys()):
+            print('** class doesn\'t exit **')
+            return
+        if not identifier:
+            print('** instance id missing **')
+            return
 
 
 if __name__ == '__main__':
