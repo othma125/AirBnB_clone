@@ -35,7 +35,7 @@ class BaseModel:
 
     def __str__(self) -> str:
         """to string"""
-        return f"[{self.__class__.__name__} ({self.id}) {self.__dict__}]"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self) -> None:
         """update"""
@@ -51,18 +51,3 @@ class BaseModel:
         my_dict["created_at"]: str = str(self.created_at.isoformat())
         my_dict["updated_at"]: str = str(self.updated_at.isoformat())
         return my_dict
-
-
-# model = BaseModel()
-# model.name: str = 'first name'
-# model.my_number = 98
-# # print(model)
-# import time
-# time.sleep(2)
-# model.save()
-# tojson = model.to_dict()
-# print(tojson)
-# # for key in tojson.keys():
-# #     print(f'{key} {type(tojson[key])}')
-# model = BaseModel(**tojson)
-# print(model.to_dict())
