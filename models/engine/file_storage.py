@@ -5,8 +5,8 @@ from models import BaseModel
 
 class FileStorage:
     """ FileStorage class """
-    def __init__(self, path: str):
-        self.__file_path: str = path
+    def __init__(self):
+        self.__file_path: str = "file.json"
         self.__objects: dict = {}
 
     def reload(self) -> None:
