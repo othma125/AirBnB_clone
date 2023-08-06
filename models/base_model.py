@@ -8,7 +8,7 @@ from uuid import uuid4
 class BaseModel:
     """ Base class """
 
-    def __init__(self, *args, ** my_dict):
+    def __init__(self, *args, **my_dict):
         """
         constructor
         :param args:
@@ -31,6 +31,7 @@ class BaseModel:
             self.id: str = str(uuid4())
             self.created_at: datetime = datetime.now()
             self.updated_at: datetime = self.created_at
+        from models import storage
         storage.new(self)
 
     def __str__(self) -> str:
@@ -42,6 +43,7 @@ class BaseModel:
         from models import storage
 
         self.updated_at = datetime.now()
+        from models import storage
         storage.save()
 
     def to_dict(self) -> dict:
