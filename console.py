@@ -2,7 +2,7 @@
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
 
-import models
+from models import BaseModel
 
 
 class HBNBCommand(Cmd):
@@ -25,7 +25,9 @@ class HBNBCommand(Cmd):
         if all(line != key for key in models.classes_dict.keys()):
             print('** class doesn\'t exit **')
             return
-        print(line)
+        model = BaseModel()
+        model.save()
+        print()
 
     def do_show(self, line):
         """ create command"""
