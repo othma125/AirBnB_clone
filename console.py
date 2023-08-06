@@ -103,7 +103,7 @@ class HBNBCommand(Cmd):
         if not line:
             print('** class name missing **')
             return
-        class_name, identifier = line.split()
+        class_name, identifier, att_name, value = line.split()
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print('** class doesn\'t exit **')
@@ -111,6 +111,24 @@ class HBNBCommand(Cmd):
         if not identifier:
             print('** instance id missing **')
             return
+        if not att_name:
+            print('** attribute name missing **')
+            return
+        if not value:
+            print('** value missing **')
+            return
+        c: bool = True
+        value = value.stri
+        from models import storage
+        for key, obj in storage.all().items():
+            name, i = key.split('.')
+            if name == class_name and i == identifier:
+                setattr(obj, att_name, value.strip('"'))
+                obj.save()
+                c = False
+                break
+        if c:
+            print('** no instance found **')
 
 
 if __name__ == '__main__':
