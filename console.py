@@ -22,12 +22,13 @@ class HBNBCommand(Cmd):
         if not line:
             print('** class name missing **')
             return
-        if all(line != key for key in models.classes_dict.keys()):
+        from models import classes_dict
+        if all(line != key for key in classes_dict.keys()):
             print('** class doesn\'t exit **')
             return
         model = BaseModel()
         model.save()
-        print()
+        print(model.id)
 
     def do_show(self, line):
         """ create command"""
@@ -35,7 +36,8 @@ class HBNBCommand(Cmd):
             print('** class name missing **')
             return
         class_name, identifier = line.split()
-        if all(class_name != key for key in models.classes_dict.keys()):
+        from models import classes_dict
+        if all(class_name != key for key in classes_dict.keys()):
             print('** class doesn\'t exit **')
             return
         if not identifier:
@@ -43,7 +45,8 @@ class HBNBCommand(Cmd):
             return
         print(line)
         c: bool = True
-        for key, obj in models.storage.all().items():
+        from models import storage
+        for key, obj in storage.all().items():
             name, i = key.split('.')
             if name == class_name and i == identifier:
                 print(obj)
