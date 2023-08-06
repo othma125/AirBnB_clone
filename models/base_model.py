@@ -29,6 +29,7 @@ class BaseModel:
             self.id: str = str(uuid4())
             self.created_at: datetime = datetime.now()
             self.updated_at: datetime = self.created_at
+        storage.new(self)
 
     def __str__(self) -> str:
         """ to string """
@@ -37,6 +38,7 @@ class BaseModel:
     def save(self) -> None:
         """ update """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self) -> dict:
         """ return dic """

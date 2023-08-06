@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
+
 import models
 
 
@@ -39,6 +40,15 @@ class HBNBCommand(Cmd):
             print('** instance id missing **')
             return
         print(line)
+        c: bool = True
+        for key, obj in models.storage.all().items():
+            name, i = key.split('.')
+            if name == class_name and i == identifier:
+                print(obj)
+                c = False
+                break
+        if c:
+            print('** no instance found **')
 
 
 if __name__ == '__main__':
