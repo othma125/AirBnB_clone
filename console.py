@@ -88,25 +88,19 @@ class HBNBCommand(Cmd):
     def do_all(self, line):
         """all command"""
         from models import storage, classes_dict
-
         res = []
         if line:
             if all(line != key for key in classes_dict.keys()):
                 print('** class doesn\'t exit **')
                 return
-            for key, my_dict in storage.all().items():
-                # line_split = line.split()
-                # class_name = line_split[0] if len(line_split) > 0 else None
-                # identifier = line_split[1] if len(line_split) > 1 else None
-                class_name, identifier= key.split('.')
-                if class_name == line:
+            for my_dict in dict(storage.all()).values():
+                if my_dict["__class__"] == line:
                     res.append(classes_dict[line](**my_dict).__str__())
         else:
-            for my_dict in storage.all().values():
+            for my_dict in dict(storage.all()).values():
                 class_name = my_dict["__class__"]
                 res.append(classes_dict[class_name](**my_dict).__str__())
         print(res)
-
     def do_update(self, line):
         """update command"""
         if not line:
