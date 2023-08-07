@@ -26,6 +26,7 @@ class HBNBCommand(Cmd):
             print("** class doesn't exit **")
             return
         model = classes_dict[line]()
+        model.save()
         print(model.id)
 
     def do_show(self, line):
@@ -64,15 +65,18 @@ class HBNBCommand(Cmd):
         res = []
         if line:
             if all(line != key for key in classes_dict.keys()):
-                print('** class doesn\'t exit **')
+                print("** class doesn't exit **")
                 return
-            for my_dict in storage.all().values():
-                if my_dict["__class__"] == line:
-                    res.append(classes_dict[line](**my_dict).__str__())
+            for key, my_dict in storage.all().items():
+                class_name, _ = key.split('.')
+                if my_dict['__class__'] == line:
+                    obj = classes_dict[line](**my_dict)
+                    res.append(str(obj))
         else:
-            for my_dict in storage.all().values():
-                class_name = my_dict["__class__"]
-                res.append(classes_dict[class_name](**my_dict).__str__())
+            for key, my_dict in storage.all().items():
+                class_name, _ = key.split('.')
+                obj = classes_dict[class_name](**my_dict)
+                res.append(str(obj))
         print(res)
 
     def do_destroy(self, line):
