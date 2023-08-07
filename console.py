@@ -25,7 +25,6 @@ class HBNBCommand(Cmd):
             print('** class doesn\'t exit **')
             return
         model = classes_dict[line]()
-        model.save()
         print(model.id)
 
     def do_show(self, line):
@@ -80,8 +79,7 @@ class HBNBCommand(Cmd):
 
     def do_all(self, line):
         """ all command"""
-        from models import storage
-        from models import classes_dict
+        from models import storage, classes_dict
         res = []
         if line:
             class_name, = line.split()
@@ -120,9 +118,10 @@ class HBNBCommand(Cmd):
         c: bool = True
         value = value.stri
         from models import storage
-        for key, obj in storage.all().items():
+        for key, my_dict in storage.all().items():
             name, i = key.split('.')
             if name == class_name and i == identifier:
+                obj = classes_dict[class_name](**my_dict)
                 setattr(obj, att_name, value.strip('"'))
                 obj.save()
                 c = False
