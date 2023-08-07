@@ -8,7 +8,7 @@ from uuid import uuid4
 class BaseModel:
     """Base class"""
 
-    def __init__(self, *args, **my_dict):
+    def __init__(self, *args, **kwargs):
         """
         constructor
         :param args:
@@ -18,8 +18,8 @@ class BaseModel:
         """
         from models import storage
 
-        if my_dict:
-            for key, value in my_dict.items():
+        if kwargs:
+            for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     t = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, t)

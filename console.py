@@ -8,11 +8,11 @@ class HBNBCommand(Cmd):
 
     prompt = "(hbnb) "
 
-    def do_EOF(self):
+    def do_EOF(self, line):
         """EOF command"""
         return True
 
-    def do_quit(self):
+    def do_quit(self, line):
         """quit command"""
         return self.do_EOF()
 
@@ -36,18 +36,22 @@ class HBNBCommand(Cmd):
             return
         print(line.split())
         # here
-        (
-            class_name,
-            identifier,
-        ) = line.split()
+        line_split = line.split()
+        if len(line_split) == 0:
+            print("** class name missing **")
+            return
+        class_name = line_split[0]
+        if len(line_split) == 1:
+            print("** instance id missing **")
+            return
+        identifier = line_split[1]
+
         from models import classes_dict
 
         if class_name not in classes_dict:
             print("** class doesn't exit **")
             return
-        if not identifier:
-            print("** instance id missing **")
-            return
+        
         c: bool = True
         from models import storage
 
