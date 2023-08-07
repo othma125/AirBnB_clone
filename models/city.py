@@ -10,4 +10,4 @@ class City(BaseModel):
         """ constructor """
         self.state_id = ""
         self.name = ""
-        super().__init__(self, args, my_dict)
+        super().__init__(args, my_dict)
