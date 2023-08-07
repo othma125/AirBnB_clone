@@ -14,7 +14,7 @@ class HBNBCommand(Cmd):
 
     def do_quit(self, line):
         """quit command"""
-        return self.do_EOF()
+        return self.do_EOF(line)
 
     def do_create(self, line):
         """create command"""
