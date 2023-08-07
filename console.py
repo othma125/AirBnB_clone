@@ -98,7 +98,7 @@ class HBNBCommand(Cmd):
                 # line_split = line.split()
                 # class_name = line_split[0] if len(line_split) > 0 else None
                 # identifier = line_split[1] if len(line_split) > 1 else None
-                class_name, = key.split('.')
+                class_name, identifier= key.split('.')
                 if class_name == line:
                     res.append(classes_dict[line](**my_dict).__str__())
         else:
