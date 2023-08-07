@@ -9,13 +9,7 @@ class BaseModel:
     """Base class"""
 
     def __init__(self, *args, **my_dict):
-        """
-        constructor
-        :param args:
-        :type args:
-        :param kwargs:
-        :type kwargs:
-        """
+        """ constructor """
         if my_dict:
             for key, value in my_dict.items():
                 if key == "created_at" or key == "updated_at":
@@ -29,9 +23,6 @@ class BaseModel:
             self.id: str = str(uuid4())
             self.created_at: datetime = datetime.now()
             self.updated_at: datetime = self.created_at
-            from models import storage
-            storage.new(self)
-            storage.save()
 
     def __str__(self) -> str:
         """to string"""
@@ -39,8 +30,8 @@ class BaseModel:
 
     def save(self) -> None:
         """ update """
-        from models import storage
         self.updated_at = datetime.now()
+        from models import storage
         storage.new(self)
         storage.save()
 

@@ -2,6 +2,7 @@
 """ Module that contains class Place """
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """Place class"""
 
