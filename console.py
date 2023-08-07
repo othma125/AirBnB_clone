@@ -104,6 +104,7 @@ class HBNBCommand(Cmd):
         if c:
             print("** no instance found **")
 
+
     def do_update(self, line):
         """update command"""
         if not line:
