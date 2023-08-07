@@ -35,7 +35,7 @@ class HBNBCommand(Cmd):
         if not line:
             print('** class name missing **')
             return
-        class_name, identifier = line.split()
+        class_name, identifier, = line.split()
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print('** class doesn\'t exit **')
@@ -89,13 +89,13 @@ class HBNBCommand(Cmd):
             if all(class_name != key for key in classes_dict.keys()):
                 print('** class doesn\'t exit **')
                 return
-            for key, obj in storage.all().values():
-                name, = key.split()
+            for key, my_dict in storage.all().items():
+                name, = key.split('.')
                 if name == class_name:
-                    res.append(str(obj))
+                    res.append(BaseModel(**my_dict).__str__())
         else:
-            for obj in storage.all().values():
-                res.append(str(obj))
+            for my_dict in storage.all().values():
+                res.append(BaseModel(**my_dict).__str__())
         print(res)
 
     def do_update(self, line):
