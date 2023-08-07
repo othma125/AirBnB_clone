@@ -37,14 +37,17 @@ class HBNBCommand(Cmd):
         print(line.split())
         # here
         line_split = line.split()
-        if len(line_split) == 0:
+        class_name = line_split[0] if len(line_split) > 0 else None
+        identifier = line_split[1] if len(line_split) > 1 else None
+        
+        if not class_name:
             print("** class name missing **")
             return
-        class_name = line_split[0]
-        if len(line_split) == 1:
+        
+        if not identifier:
             print("** instance id missing **")
             return
-        identifier = line_split[1]
+        
 
         from models import classes_dict
 
