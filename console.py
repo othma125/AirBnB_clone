@@ -2,8 +2,6 @@
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
 
-from models import BaseModel
-
 
 class HBNBCommand(Cmd):
     """ HBNBCommand class """
@@ -26,7 +24,7 @@ class HBNBCommand(Cmd):
         if all(line != key for key in classes_dict.keys()):
             print('** class doesn\'t exit **')
             return
-        model = BaseModel()
+        model = classes_dict[line]()
         model.save()
         print(model.id)
 
@@ -45,10 +43,11 @@ class HBNBCommand(Cmd):
             return
         c: bool = True
         from models import storage
-        for key, obj in storage.all().items():
+        for key, my_dict in storage.all().items():
             name, i = key.split('.')
             if name == class_name and i == identifier:
-                print(obj)
+                class_name = my_dict['__class__']
+                print(classes_dict[class_name](**my_dict).__str__())
                 c = False
                 break
         if c:
@@ -82,20 +81,21 @@ class HBNBCommand(Cmd):
     def do_all(self, line):
         """ all command"""
         from models import storage
+        from models import classes_dict
         res = []
         if line:
             class_name, = line.split()
-            from models import classes_dict
             if all(class_name != key for key in classes_dict.keys()):
                 print('** class doesn\'t exit **')
                 return
             for key, my_dict in storage.all().items():
                 name, = key.split('.')
                 if name == class_name:
-                    res.append(BaseModel(**my_dict).__str__())
+                    res.append(classes_dict[class_name](**my_dict).__str__())
         else:
             for my_dict in storage.all().values():
-                res.append(BaseModel(**my_dict).__str__())
+                class_name = my_dict['__class__']
+                res.append(classes_dict[class_name](**my_dict).__str__())
         print(res)
 
     def do_update(self, line):
