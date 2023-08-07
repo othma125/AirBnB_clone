@@ -9,13 +9,7 @@ class BaseModel:
     """Base class"""
 
     def __init__(self, *args, **my_dict):
-        """
-        constructor
-        :param args:
-        :type args:
-        :param kwargs:
-        :type kwargs:
-        """
+        """ constructor """
         if my_dict:
             for key, value in my_dict.items():
                 if key == "created_at" or key == "updated_at":
