@@ -82,16 +82,17 @@ class HBNBCommand(Cmd):
         from models import storage, classes_dict
         res = []
         if line:
-            class_name, = line.split()
-            if all(class_name != key for key in classes_dict.keys()):
+            if all(line != key for key in classes_dict.keys()):
                 print('** class doesn\'t exit **')
                 return
-            for key, my_dict in storage.all().items():
-                name, = key.split('.')
-                if name == class_name:
-                    res.append(classes_dict[class_name](**my_dict).__str__())
+            data: dict = storage.all()
+            for key, my_dict in data.items():
+                class_name, identifier = key.split('.')
+                if class_name == line:
+                    res.append(classes_dict[line](**my_dict).__str__())
         else:
-            for my_dict in storage.all().values():
+            data: dict = storage.all()
+            for my_dict in data.values():
                 class_name = my_dict['__class__']
                 res.append(classes_dict[class_name](**my_dict).__str__())
         print(res)

@@ -16,8 +16,6 @@ class BaseModel:
         :param kwargs:
         :type kwargs:
         """
-        from models import storage
-
         if my_dict:
             for key, value in my_dict.items():
                 if key == "created_at" or key == "updated_at":
@@ -31,6 +29,7 @@ class BaseModel:
             self.id: str = str(uuid4())
             self.created_at: datetime = datetime.now()
             self.updated_at: datetime = self.created_at
+        from models import storage
         storage.new(self)
         storage.save()
 
