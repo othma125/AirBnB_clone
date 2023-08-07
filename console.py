@@ -85,14 +85,12 @@ class HBNBCommand(Cmd):
             if all(line != key for key in classes_dict.keys()):
                 print('** class doesn\'t exit **')
                 return
-            data: dict = storage.all()
-            for key, my_dict in data.items():
+            for key, my_dict in storage.all().items():
                 class_name, identifier = key.split('.')
                 if class_name == line:
                     res.append(classes_dict[line](**my_dict).__str__())
         else:
-            data: dict = storage.all()
-            for my_dict in data.values():
+            for my_dict in storage.all().values():
                 class_name = my_dict['__class__']
                 res.append(classes_dict[class_name](**my_dict).__str__())
         print(res)
@@ -117,7 +115,6 @@ class HBNBCommand(Cmd):
             print('** value missing **')
             return
         c: bool = True
-        value = value.stri
         from models import storage
         for key, my_dict in storage.all().items():
             name, i = key.split('.')
