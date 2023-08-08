@@ -28,7 +28,7 @@ class HBNBCommand(Cmd):
             return
         from models import classes_dict
         if line not in classes_dict:
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
             return
         model = classes_dict[line]()
         model.save()
@@ -50,7 +50,7 @@ class HBNBCommand(Cmd):
             return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
             return
         c: bool = True
         from models import storage
@@ -71,7 +71,7 @@ class HBNBCommand(Cmd):
         res = []
         if line:
             if all(line != key for key in classes_dict.keys()):
-                print("** class doesn't exit **")
+                print("** class doesn't exist **")
                 return
             for key, my_dict in storage.all().items():
                 class_name, _ = key.split('.')
@@ -90,13 +90,15 @@ class HBNBCommand(Cmd):
         if not line:
             print("** class name missing **")
             return
-        class_name, identifier = line.split()
+        line_split = line.split()
+        class_name = line_split[0] if len(line_split) > 0 else None
+        identifier = line_split[1] if len(line_split) > 1 else None
         if not identifier:
             print("** instance id missing **")
             return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
             return
         c: bool = True
         from models import storage
@@ -127,7 +129,7 @@ class HBNBCommand(Cmd):
             return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
             return
         c: bool = True
         from models import storage
