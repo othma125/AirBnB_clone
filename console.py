@@ -8,6 +8,10 @@ class HBNBCommand(Cmd):
 
     prompt = "(hbnb) "
 
+    # def precmd(self, line):
+    #     print(line)
+    #     return Cmd.precmd(self, line)
+
     def do_EOF(self, line):
         """EOF command"""
         return True
@@ -136,6 +140,22 @@ class HBNBCommand(Cmd):
                 break
         if c:
             print("** no instance found **")
+
+    def do_count(self, line):
+        """all command"""
+        from models import storage, classes_dict
+        count = 0
+        if line:
+            if all(line != key for key in classes_dict.keys()):
+                print("** class doesn't exit **")
+                return
+            for key, my_dict in storage.all().items():
+                class_name, _ = key.split('.')
+                if my_dict['__class__'] == line:
+                    count += 1
+        else:
+            count = len(storage.all())
+        print(count)
 
 
 if __name__ == "__main__":
