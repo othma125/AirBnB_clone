@@ -53,4 +53,8 @@ class TestAmenityMethods(TestCase):
             self.assertEqual(out.getvalue(), output)
         amenity = Amenity(**my_dict)
         self.assertIsNot(amenity, self.amenity)
+        self.assertEqual(type(amenity.name), str)
         self.assertEqual(type(amenity.id), str)
+        self.assertEqual(type(amenity.created_at), datetime)
+        self.assertEqual(type(amenity.updated_at), datetime)
+        self.assertTrue(amenity.updated_at >= amenity.created_at)

@@ -54,4 +54,8 @@ class TestStateMethods(TestCase):
             self.assertEqual(out.getvalue(), output)
         state = State(**my_dict)
         self.assertIsNot(state, self.state)
+        self.assertEqual(type(state.name), str)
         self.assertEqual(type(state.id), str)
+        self.assertEqual(type(state.created_at), datetime)
+        self.assertEqual(type(state.updated_at), datetime)
+        self.assertTrue(state.updated_at >= state.created_at)

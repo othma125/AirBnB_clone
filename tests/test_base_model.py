@@ -62,3 +62,10 @@ class TestBaseMethods(TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             print(model.to_dict())
             self.assertEqual(out.getvalue(), output)
+
+        basemodel = BaseModel(**my_dict)
+        self.assertIsNot(basemodel, self.model)
+        self.assertEqual(type(basemodel.id), str)
+        self.assertEqual(type(basemodel.created_at), datetime)
+        self.assertEqual(type(basemodel.updated_at), datetime)
+        self.assertTrue(basemodel.updated_at >= basemodel.created_at)
