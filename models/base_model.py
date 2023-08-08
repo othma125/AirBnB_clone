@@ -42,3 +42,5 @@ class BaseModel:
         my_dict.update({"created_at": str(self.created_at.isoformat())})
         my_dict.update({"updated_at": str(self.updated_at.isoformat())})
         return my_dict
+    
+    
