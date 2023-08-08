@@ -67,11 +67,10 @@ class TestAmenityMethods(TestCase):
         key = self.amenity.__class__.__name__ + "." + self.amenity.id
         from models import storage
         self.assertIn(key, storage.all())
-        self.assertEqual(storage.all()[key], self.amenity)
+        self.assertEqual(storage.all()[key], self.amenity.to_dict())
         # test all attributes exist
         self.assertIn("id", storage.all()[key])
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
         self.assertIn("name", storage.all()[key])
-        
