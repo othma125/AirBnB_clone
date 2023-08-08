@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
+import re
 
 
 class HBNBCommand(Cmd):
@@ -156,6 +157,45 @@ class HBNBCommand(Cmd):
         else:
             count = len(storage.all())
         print(count)
+
+    def default(self, line):
+        """
+        handle invalid commands and
+        special commands like <class name>.<command>()
+        """
+        match = re.fullmatch(r"[A-Za-z]+\.[A-Za-z]+\(.*?\)", line)
+        if match:
+            split_line = line.split('.')
+            from models import classes_dict
+            if any(split_line[0] == key for key in classes_dict.keys()):
+                parsed = split_line[1].split("(")
+                parsed[1] = parsed[1].strip(")")
+                args = parsed[1].split(",")
+                args = [arg.strip() for arg in args]
+                if len(args) >= 3:
+                    temp = args[2]
+                    args = [arg.strip('"') for arg in args[:2]]
+                    args.append(temp)
+                else:
+                    args = [arg.strip('"') for arg in args]
+                commands = {"all": HBNBCommand.do_all, "show": HBNBCommand.do_show,
+                            "destroy": HBNBCommand.do_destroy, "update": HBNBCommand.do_update,
+                            "count": HBNBCommand.do_count}
+                c: bool = True
+                for key, command in commands.items():
+                    if key == parsed[0]:
+                        reconstructed_args = [arg for arg in args]
+                        reconstructed_args.insert(0, split_line[0])
+                        reconstructed_command = " ".join(reconstructed_args)
+                        command(self, reconstructed_command)
+                        c = False
+                        break
+                if c:
+                    print(f"*** Unknown syntax: {line}")
+            else:
+                print("** class doesn't exist **")
+        else:
+            print(f"*** Unknown syntax: {line}")
 
 
 if __name__ == "__main__":
