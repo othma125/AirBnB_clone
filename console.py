@@ -25,6 +25,10 @@ class HBNBCommand(Cmd):
         """ exit command """
         return True
 
+    def emptyline(self):
+        """Ignore empty line"""
+        pass
+
     def do_create(self, line):
         """ create command """
         if not line:
