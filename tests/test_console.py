@@ -72,11 +72,15 @@ class TestConsole(TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("destroy my_class")
             self.assertEqual(out.getvalue(), output)
-        output = "** instance id missing **\n"
+        output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("update my_class")
             self.assertEqual(out.getvalue(), output)
         output = "** instance id missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("show User")
+            self.assertEqual(out.getvalue(), output)
+        output = "** instance id missing **\n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("update User")
             self.assertEqual(out.getvalue(), output)
