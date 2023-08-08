@@ -45,12 +45,12 @@ class HBNBCommand(Cmd):
         if not class_name:
             print("** class name missing **")
             return
-        if not identifier:
-            print("** instance id missing **")
-            return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print("** class doesn't exist **")
+            return
+        if not identifier:
+            print("** instance id missing **")
             return
         c: bool = True
         from models import storage
@@ -93,12 +93,12 @@ class HBNBCommand(Cmd):
         line_split = line.split()
         class_name = line_split[0] if len(line_split) > 0 else None
         identifier = line_split[1] if len(line_split) > 1 else None
-        if not identifier:
-            print("** instance id missing **")
-            return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print("** class doesn't exist **")
+            return
+        if not identifier:
+            print("** instance id missing **")
             return
         c: bool = True
         from models import storage
@@ -117,19 +117,23 @@ class HBNBCommand(Cmd):
         if not line:
             print("** class name missing **")
             return
-        class_name, identifier, att_name, value = line.split()
+        line_split = line.split()
+        class_name = line_split[0] if len(line_split) > 0 else None
+        identifier = line_split[1] if len(line_split) > 1 else None
+        att_name = line_split[2] if len(line_split) > 2 else None
+        value = line_split[3] if len(line_split) > 3 else None
         if not identifier:
             print("** instance id missing **")
+            return
+        from models import classes_dict
+        if all(class_name != key for key in classes_dict.keys()):
+            print("** class doesn't exist **")
             return
         if not att_name:
             print("** attribute name missing **")
             return
         if not value:
             print("** value missing **")
-            return
-        from models import classes_dict
-        if all(class_name != key for key in classes_dict.keys()):
-            print("** class doesn't exist **")
             return
         c: bool = True
         from models import storage
