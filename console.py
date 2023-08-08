@@ -143,7 +143,7 @@ class HBNBCommand(Cmd):
             print("** no instance found **")
 
     def do_count(self, line):
-        """ all command """
+        """ count command """
         from models import storage, classes_dict
         count = 0
         if line:
