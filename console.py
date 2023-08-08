@@ -178,8 +178,10 @@ class HBNBCommand(Cmd):
                     args.append(temp)
                 else:
                     args = [arg.strip('"') for arg in args]
-                commands = {"all": HBNBCommand.do_all, "show": HBNBCommand.do_show,
-                            "destroy": HBNBCommand.do_destroy, "update": HBNBCommand.do_update,
+                commands = {"all": HBNBCommand.do_all,
+                            "show": HBNBCommand.do_show,
+                            "destroy": HBNBCommand.do_destroy,
+                            "update": HBNBCommand.do_update,
                             "count": HBNBCommand.do_count}
                 c: bool = True
                 for key, command in commands.items():

@@ -6,8 +6,10 @@ from unittest.mock import patch
 from models.user import User
 from unittest import TestCase
 
+
 class TestUserMethods(TestCase):
     """Suite to test User class"""
+
     def setUp(self) -> None:
         """set up method"""
         self.user = User()
@@ -53,7 +55,7 @@ class TestUserMethods(TestCase):
         output += f", 'created_at': '{self.user.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.user.updated_at.isoformat()}'"
         output += f", '__class__': '{self.user.__class__.__name__}'"
-        
+
         output += "}\n"
         with patch("sys.stdout", new=StringIO()) as out:
             print(my_dict)

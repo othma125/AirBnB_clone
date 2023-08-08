@@ -6,8 +6,10 @@ from unittest.mock import patch
 from models.amenity import Amenity
 from unittest import TestCase
 
+
 class TestAmenityMethods(TestCase):
     """Suite to test Amenity class"""
+
     def setUp(self) -> None:
         """set up method"""
         self.amenity = Amenity()

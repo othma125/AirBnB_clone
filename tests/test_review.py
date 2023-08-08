@@ -6,8 +6,10 @@ from unittest.mock import patch
 from models.review import Review
 from unittest import TestCase
 
+
 class TestReviewMethods(TestCase):
     """Suite to test Review class"""
+
     def setUp(self) -> None:
         """set up method"""
         self.review = Review()

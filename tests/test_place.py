@@ -6,8 +6,10 @@ from unittest.mock import patch
 from models.place import Place
 from unittest import TestCase
 
+
 class TestPlaceMethods(TestCase):
     """Suite to test Place class"""
+
     def setUp(self) -> None:
         """set up method"""
         self.place = Place()
@@ -88,5 +90,3 @@ class TestPlaceMethods(TestCase):
         self.assertEqual(type(place.created_at), datetime)
         self.assertEqual(type(place.updated_at), datetime)
         self.assertTrue(place.updated_at >= place.created_at)
-
-        
