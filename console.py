@@ -44,7 +44,7 @@ class HBNBCommand(Cmd):
             print("** instance id missing **")
             return
         from models import classes_dict
-        if class_name not in classes_dict:
+        if all(class_name != key for key in classes_dict.keys()):
             print("** class doesn't exit **")
             return
         c: bool = True
@@ -53,7 +53,8 @@ class HBNBCommand(Cmd):
             if my_dict['__class__'] == class_name \
                     and my_dict['id'] == identifier:
                 class_name = my_dict["__class__"]
-                print(classes_dict[class_name](**my_dict).__str__())
+                obj = classes_dict[class_name](**my_dict)
+                print(str(obj))
                 c = False
                 break
         if c:
