@@ -77,4 +77,8 @@ class TestCityMethods(TestCase):
         self.assertIn("__class__", storage.all()[key])
         self.assertIn("state_id", storage.all()[key])
         self.assertIn("name", storage.all()[key])
-        
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.city), "[City] ({}) {}".
+                         format(self.city.id, self.city.__dict__))

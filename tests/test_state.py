@@ -73,3 +73,8 @@ class TestStateMethods(TestCase):
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
         self.assertIn("name", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.state), "[State] ({}) {}".
+                         format(self.state.id, self.state.__dict__))

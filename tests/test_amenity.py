@@ -74,3 +74,8 @@ class TestAmenityMethods(TestCase):
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
         self.assertIn("name", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.amenity), "[Amenity] ({}) {}".
+                         format(self.amenity.id, self.amenity.__dict__))

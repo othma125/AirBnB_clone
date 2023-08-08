@@ -85,3 +85,8 @@ class TestUserMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.user), "[User] ({}) {}".format(
+            self.user.id, self.user.__dict__))

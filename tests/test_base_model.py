@@ -82,3 +82,8 @@ class TestBaseMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.model), "[BaseModel] ({}) {}".
+                         format(self.model.id, self.model.__dict__))

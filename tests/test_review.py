@@ -83,3 +83,8 @@ class TestReviewMethods(TestCase):
         self.assertIn("place_id", storage.all()[key])
         self.assertIn("user_id", storage.all()[key])
         self.assertIn("text", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.review), "[Review] ({}) {}".
+                         format(self.review.id, self.review.__dict__))

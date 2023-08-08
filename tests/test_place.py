@@ -114,3 +114,9 @@ class TestPlaceMethods(TestCase):
         self.assertIn("latitude", storage.all()[key])
         self.assertIn("longitude", storage.all()[key])
         self.assertIn("amenity_ids", storage.all()[key])
+
+    def test_str(self):
+        """ Testing str """
+        self.assertEqual(str(self.place),
+                         "[Place] ({}) {}".format(self.place.id,
+                                                  self.place.__dict__))
