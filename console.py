@@ -122,12 +122,12 @@ class HBNBCommand(Cmd):
         identifier = line_split[1] if len(line_split) > 1 else None
         att_name = line_split[2] if len(line_split) > 2 else None
         value = line_split[3] if len(line_split) > 3 else None
-        if not identifier:
-            print("** instance id missing **")
-            return
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print("** class doesn't exist **")
+            return
+        if not identifier:
+            print("** instance id missing **")
             return
         if not att_name:
             print("** attribute name missing **")
