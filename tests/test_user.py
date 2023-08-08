@@ -72,3 +72,16 @@ class TestUserMethods(TestCase):
         self.assertEqual(user.updated_at, self.user.updated_at)
         self.assertEqual(user.created_at, self.user.created_at)
         self.assertTrue(user.updated_at >= user.created_at)
+
+    def test_save(self):
+        """ Testing save """
+        self.user.save()
+        key = self.user.__class__.__name__ + "." + str(self.user.id)
+        from models import storage
+        self.assertIn(key, storage.all())
+        self.assertEqual(storage.all()[key], self.user.to_dict())
+        # test all attributes exist
+        self.assertIn("id", storage.all()[key])
+        self.assertIn("created_at", storage.all()[key])
+        self.assertIn("updated_at", storage.all()[key])
+        self.assertIn("__class__", storage.all()[key])
