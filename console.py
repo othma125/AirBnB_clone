@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
-import re
+from re import fullmatch
 
 
 class HBNBCommand(Cmd):
@@ -163,7 +163,7 @@ class HBNBCommand(Cmd):
         handle invalid commands and
         special commands like <class name>.<command>()
         """
-        match = re.fullmatch(r"[A-Za-z]+\.[A-Za-z]+\(.*?\)", line)
+        match = fullmatch(r"[A-Za-z]+\.[A-Za-z]+\(.*?\)", line)
         if match:
             split_line = line.split('.')
             from models import classes_dict

@@ -17,3 +17,27 @@ class TestConsole(TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("help show")
             self.assertEqual(out.getvalue(), output)
+        output = " create command \n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("help create")
+            self.assertEqual(out.getvalue(), output)
+        output = " all command \n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("help all")
+            self.assertEqual(out.getvalue(), output)
+        output = " update command \n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("help update")
+            self.assertEqual(out.getvalue(), output)
+        output = " destroy command \n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("help destroy")
+            self.assertEqual(out.getvalue(), output)
+        output = " count command \n"
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("help count")
+            self.assertEqual(out.getvalue(), output)
+        output = ""
+        with patch("sys.stdout", new=StringIO()) as out:
+            HBNBCommand().onecmd("quit")
+            self.assertEqual(out.getvalue(), output)
