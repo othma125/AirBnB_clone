@@ -21,6 +21,10 @@ class HBNBCommand(Cmd):
         """ quit command """
         return True
 
+    def do_exit(self, line):
+        """ exit command """
+        return True
+
     def do_create(self, line):
         """ create command """
         if not line:
@@ -70,6 +74,7 @@ class HBNBCommand(Cmd):
         from models import storage, classes_dict
         res = []
         if line:
+            line = line.split()[0]
             if all(line != key for key in classes_dict.keys()):
                 print("** class doesn't exist **")
                 return
@@ -153,6 +158,7 @@ class HBNBCommand(Cmd):
         from models import storage, classes_dict
         count = 0
         if line:
+            line = line.split()[0]
             if all(line != key for key in classes_dict.keys()):
                 print("** class doesn't exit **")
                 return
@@ -193,7 +199,8 @@ class HBNBCommand(Cmd):
                 for key, command in commands.items():
                     if key == parsed[0]:
                         reconstructed_args = args.copy()
-                        # reconstructed_args.insert(0, split_line[0])
+                        reconstructed_args.insert(0, split_line[0])
+                        # reconstructed_args.pop(1)
                         reconstructed_command = " ".join(reconstructed_args)
                         command(self, reconstructed_command)
                         c = False
