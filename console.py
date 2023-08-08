@@ -192,8 +192,8 @@ class HBNBCommand(Cmd):
                 c: bool = True
                 for key, command in commands.items():
                     if key == parsed[0]:
-                        reconstructed_args = [arg for arg in args]
-                        reconstructed_args.insert(0, split_line[0])
+                        reconstructed_args = args.copy()
+                        # reconstructed_args.insert(0, split_line[0])
                         reconstructed_command = " ".join(reconstructed_args)
                         command(self, reconstructed_command)
                         c = False
