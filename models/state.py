@@ -9,4 +9,4 @@ class State(BaseModel):
     def __init__(self, *args, **my_dict):
         """ constructor """
         self.name = ""
-        super().__init__(args, my_dict)
+        super().__init__(*args, **my_dict)

@@ -50,7 +50,7 @@ class HBNBCommand(Cmd):
         c: bool = True
         from models import storage
         for my_dict in storage.all().values():
-            if my_dict['__class__'] == class_name\
+            if my_dict['__class__'] == class_name \
                     and my_dict['id'] == identifier:
                 class_name = my_dict["__class__"]
                 print(classes_dict[class_name](**my_dict).__str__())
@@ -104,7 +104,6 @@ class HBNBCommand(Cmd):
         if c:
             print("** no instance found **")
 
-
     def do_update(self, line):
         """update command"""
         if not line:
@@ -126,7 +125,6 @@ class HBNBCommand(Cmd):
             return
         c: bool = True
         from models import storage
-
         for key, my_dict in storage.all().items():
             name, i = key.split(".")
             if name == class_name and i == identifier:
