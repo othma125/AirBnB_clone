@@ -36,7 +36,8 @@ class TestCityMethods(TestCase):
         self.assertEqual(type(self.city.id), str)
         self.assertEqual(type(self.city.created_at), datetime)
         self.assertEqual(type(self.city.updated_at), datetime)
-        self.assertEqual(type(self.city.id), str)
+        self.assertEqual(type(self.city.state_id), str)
+        self.assertEqual(type(self.city.name), str)
         self.assertTrue(self.city.updated_at >= self.city.created_at)
 
     def test_read_from_dict(self) -> None:
