@@ -200,7 +200,6 @@ class HBNBCommand(Cmd):
                     if key == parsed[0]:
                         reconstructed_args = args.copy()
                         reconstructed_args.insert(0, split_line[0])
-                        # reconstructed_args.pop(1)
                         reconstructed_command = " ".join(reconstructed_args)
                         command(self, reconstructed_command)
                         c = False
