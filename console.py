@@ -2,7 +2,27 @@
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
 from json import loads
-from re import fullmatch
+from re import fullmatch, search
+
+
+def extract_args(string: str):
+    """ handle command that contains dictionary format """
+    match = search(r'\((.*?)\)', string)
+    if not match:
+        return []
+    args = match.group(1)
+    # If there's a '{', extract everything between '{' and '}'
+    if '{' in args:
+        curly_braces_content = search(r'\{(.*?)\}', args)
+        if curly_braces_content:
+            args = args.replace(curly_braces_content.group(0), '').split(',')
+            args = [arg.strip() for arg in args if arg.strip()]
+            args.append(curly_braces_content.group(0))
+        else:
+            args = args.split(',')
+    else:
+        args = args.split(',')
+    return [arg.strip() for arg in args if arg.strip()]
 
 
 class HBNBCommand(Cmd):
@@ -224,10 +244,13 @@ class HBNBCommand(Cmd):
                 c: bool = True
                 for key, command in commands.items():
                     if key == parsed[0]:
-                        reconstructed_args = args.copy()
-                        reconstructed_args.insert(0, split_line[0])
-                        reconstructed_command = " ".join(reconstructed_args)
-                        command(self, reconstructed_command)
+                        if key == 'update':
+                            reconstructed_args = extract_args(parsed[1])
+                            print(reconstructed_args)
+                        else:
+                            reconstructed_args = args.copy()
+                            reconstructed_args.insert(0, split_line[0])
+                        command(self, " ".join(reconstructed_args))
                         c = False
                         break
                 if c:
