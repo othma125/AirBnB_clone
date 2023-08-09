@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
+from json import loads
 from re import fullmatch
 
 
@@ -127,35 +128,52 @@ class HBNBCommand(Cmd):
             print("** class name missing **")
             return
         line_split = line.split()
-        class_name = line_split[0] if len(line_split) > 0 else None
-        identifier = line_split[1] if len(line_split) > 1 else None
-        att_name = line_split[2] if len(line_split) > 2 else None
-        value = line_split[3] if len(line_split) > 3 else None
+        n: int = len(line_split)
+        class_name = line_split[0] if n > 0 else None
         from models import classes_dict
         if all(class_name != key for key in classes_dict.keys()):
             print("** class doesn't exist **")
             return
+        identifier = line_split[1] if n > 1 else None
         if not identifier:
             print("** instance id missing **")
             return
-        if not att_name:
-            print("** attribute name missing **")
-            return
-        if not value:
-            print("** value missing **")
-            return
-        c: bool = True
-        from models import storage
-        for key, my_dict in storage.all().items():
-            name, i = key.split(".")
-            if name == class_name and i == identifier:
-                obj = classes_dict[class_name](**my_dict)
-                setattr(obj, att_name, value.strip('"'))
-                obj.save()
-                c = False
-                break
-        if c:
-            print("** no instance found **")
+        if n > 3:
+            att_name = line_split[2]
+            value = line_split[3]
+            if not att_name:
+                print("** attribute name missing **")
+                return
+            if not value:
+                print("** value missing **")
+                return
+            c: bool = True
+            from models import storage
+            for key, my_dict in storage.all().items():
+                name, i = key.split(".")
+                if name == class_name and i == identifier:
+                    obj = classes_dict[class_name](**my_dict)
+                    setattr(obj, att_name, value.strip('"'))
+                    obj.save()
+                    c = False
+                    break
+            if c:
+                print("** no instance found **")
+        else:
+            dct: dict = loads(line_split[2])
+            c: bool = True
+            from models import storage
+            for key, my_dict in storage.all().items():
+                name, i = key.split(".")
+                if name == class_name and i == identifier:
+                    obj = classes_dict[class_name](**my_dict)
+                    for att_name, value in dct.items():
+                        setattr(obj, att_name, value.strip('"'))
+                    obj.save()
+                    c = False
+                    break
+            if c:
+                print("** no instance found **")
 
     def do_count(self, line):
         """ count command """
