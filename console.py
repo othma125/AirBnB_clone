@@ -160,20 +160,24 @@ class HBNBCommand(Cmd):
             if c:
                 print("** no instance found **")
         else:
-            dct: dict = loads(line_split[2])
-            c: bool = True
-            from models import storage
-            for key, my_dict in storage.all().items():
-                name, i = key.split(".")
-                if name == class_name and i == identifier:
-                    obj = classes_dict[class_name](**my_dict)
-                    for att_name, value in dct.items():
-                        setattr(obj, att_name, value.strip('"'))
-                    obj.save()
-                    c = False
-                    break
-            if c:
-                print("** no instance found **")
+            try:
+                dct: dict = loads(line_split[2])
+            except ValueError:
+                print("** value missing **")
+            else:
+                c: bool = True
+                from models import storage
+                for key, my_dict in storage.all().items():
+                    name, i = key.split(".")
+                    if name == class_name and i == identifier:
+                        obj = classes_dict[class_name](**my_dict)
+                        for att_name, value in dct.items():
+                            setattr(obj, att_name, value.strip('"'))
+                        obj.save()
+                        c = False
+                        break
+                if c:
+                    print("** no instance found **")
 
     def do_count(self, line):
         """ count command """
