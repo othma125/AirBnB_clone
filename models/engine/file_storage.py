@@ -12,6 +12,10 @@ class FileStorage:
         self.__file_path: str = "file.json"
         self.__objects: dict = {}
 
+    def all(self) -> dict:
+        """return data dict"""
+        return self.__objects
+
     def reload(self) -> None:
         """reload method"""
         if os.path.isfile(self.__file_path):
@@ -27,7 +31,3 @@ class FileStorage:
         """new element is added to dic"""
         key: str = obj.__class__.__name__ + "." + obj.id
         self.__objects.update({key: obj.to_dict()})
-
-    def all(self) -> dict:
-        """return data dict"""
-        return self.__objects
