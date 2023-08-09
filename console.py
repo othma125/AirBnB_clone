@@ -85,7 +85,7 @@ class HBNBCommand(Cmd):
         from models import storage
         for my_dict in storage.all().values():
             if my_dict['__class__'] == class_name \
-                    and my_dict['id'] == identifier:
+                    and my_dict['id'] == identifier.strip("'\""):
                 class_name = my_dict["__class__"]
                 obj = classes_dict[class_name](**my_dict)
                 print(str(obj))
@@ -134,7 +134,7 @@ class HBNBCommand(Cmd):
         from models import storage
         for key, my_dict in storage.all().items():
             if my_dict['__class__'] == class_name \
-                    and my_dict['id'] == identifier:
+                    and my_dict['id'] == identifier.strip("'\""):
                 storage.all().pop(key)
                 storage.save()
                 c = False
@@ -171,9 +171,9 @@ class HBNBCommand(Cmd):
             from models import storage
             for key, my_dict in storage.all().items():
                 name, i = key.split(".")
-                if name == class_name and i == identifier:
+                if name == class_name and i == identifier.strip('\'"'):
                     obj = classes_dict[class_name](**my_dict)
-                    setattr(obj, att_name, value.strip('"'))
+                    setattr(obj, att_name.strip('\'"'), value.strip('\'"'))
                     obj.save()
                     c = False
                     break
@@ -189,10 +189,10 @@ class HBNBCommand(Cmd):
                 from models import storage
                 for key, my_dict in storage.all().items():
                     name, i = key.split(".")
-                    if name == class_name and i == identifier:
+                    if name == class_name and i == identifier.strip('\'"'):
                         obj = classes_dict[class_name](**my_dict)
                         for att_name, value in dct.items():
-                            setattr(obj, att_name, value.strip('"'))
+                            setattr(obj, att_name.strip('\'"'), value.strip('\'"'))
                         obj.save()
                         c = False
                         break
