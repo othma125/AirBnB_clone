@@ -22,17 +22,13 @@ def extract_args(string: str):
             args = args.split(',')
     else:
         args = args.split(',')
-    return [arg.strip() for arg in args if arg.strip()]
+    return [arg.strip() for arg in args if arg.strip('\'"')]
 
 
 class HBNBCommand(Cmd):
     """HBNBCommand class"""
 
     prompt = "(hbnb) "
-
-    # def precmd(self, line):
-    #     print(line)
-    #     return Cmd.precmd(self, line)
 
     def do_EOF(self, line):
         """EOF command"""
@@ -246,7 +242,6 @@ class HBNBCommand(Cmd):
                     if key == parsed[0]:
                         if key == 'update':
                             reconstructed_args = extract_args(split_line[1])
-                            print(reconstructed_args)
                         else:
                             reconstructed_args = args.copy()
                         reconstructed_args.insert(0, split_line[0])
