@@ -245,11 +245,11 @@ class HBNBCommand(Cmd):
                 for key, command in commands.items():
                     if key == parsed[0]:
                         if key == 'update':
-                            reconstructed_args = extract_args(parsed[1])
+                            reconstructed_args = extract_args(split_line[1])
                             print(reconstructed_args)
                         else:
                             reconstructed_args = args.copy()
-                            reconstructed_args.insert(0, split_line[0])
+                        reconstructed_args.insert(0, split_line[0])
                         command(self, " ".join(reconstructed_args))
                         c = False
                         break
