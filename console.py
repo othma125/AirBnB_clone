@@ -1,28 +1,7 @@
 #!/usr/bin/python3
 """ Module that contains class HBNBCommand """
 from cmd import Cmd
-from json import loads
-from re import fullmatch, search
-
-
-def extract_args(string: str):
-    """ handle command that contains dictionary format """
-    match = search(r'\((.*?)\)', string)
-    if not match:
-        return []
-    args = match.group(1)
-    # If there's a '{', extract everything between '{' and '}'
-    if '{' in args:
-        curly_braces_content = search(r'\{(.*?)\}', args)
-        if curly_braces_content:
-            args = args.replace(curly_braces_content.group(0), '').split(',')
-            args = [arg.strip() for arg in args if arg.strip()]
-            args.append(curly_braces_content.group(0))
-        else:
-            args = args.split(',')
-    else:
-        args = args.split(',')
-    return [arg.strip() for arg in args if arg.strip('\'"')]
+from re import fullmatch
 
 
 class HBNBCommand(Cmd):
@@ -77,17 +56,15 @@ class HBNBCommand(Cmd):
         if not identifier:
             print("** instance id missing **")
             return
-        c: bool = True
         from models import storage
         for my_dict in storage.all().values():
-            if my_dict['__class__'] == class_name \
+            if my_dict['__class__'] == class_name.strip("'\"") \
                     and my_dict['id'] == identifier.strip("'\""):
                 class_name = my_dict["__class__"]
                 obj = classes_dict[class_name](**my_dict)
                 print(str(obj))
-                c = False
                 break
-        if c:
+        else:
             print("** no instance found **")
 
     def do_all(self, line):
@@ -126,16 +103,14 @@ class HBNBCommand(Cmd):
         if not identifier:
             print("** instance id missing **")
             return
-        c: bool = True
         from models import storage
         for key, my_dict in storage.all().items():
-            if my_dict['__class__'] == class_name \
+            if my_dict['__class__'] == class_name.strip("'\"") \
                     and my_dict['id'] == identifier.strip("'\""):
                 storage.all().pop(key)
                 storage.save()
-                c = False
                 break
-        if c:
+        else:
             print("** no instance found **")
 
     def do_update(self, line):
@@ -154,46 +129,25 @@ class HBNBCommand(Cmd):
         if not identifier:
             print("** instance id missing **")
             return
-        if n > 3:
-            att_name = line_split[2]
-            value = line_split[3]
-            if not att_name:
-                print("** attribute name missing **")
-                return
-            if not value:
-                print("** value missing **")
-                return
-            c: bool = True
-            from models import storage
-            for key, my_dict in storage.all().items():
-                name, i = key.split(".")
-                if name == class_name and i == identifier.strip('\'"'):
-                    obj = classes_dict[class_name](**my_dict)
-                    setattr(obj, att_name.strip('\'"'), value.strip('\'"'))
-                    obj.save()
-                    c = False
-                    break
-            if c:
-                print("** no instance found **")
+        att_name = line_split[2] if n > 2 else None
+        if not att_name:
+            print("** attribute name missing **")
+            return
+        value = line_split[3] if n > 3 else None
+        if not value:
+            print("** value missing **")
+            return
+        from models import storage
+        for key, my_dict in storage.all().items():
+            name, i = key.split(".")
+            if name == class_name.strip("'\"")\
+                    and i == identifier.strip('\'"'):
+                obj = classes_dict[class_name](**my_dict)
+                setattr(obj, att_name.strip('{\'"'), value.strip(',}\'"'))
+                obj.save()
+                break
         else:
-            try:
-                dct: dict = loads(line_split[2])
-            except ValueError:
-                print("** value missing **")
-            else:
-                c: bool = True
-                from models import storage
-                for key, my_dict in storage.all().items():
-                    name, i = key.split(".")
-                    if name == class_name and i == identifier.strip('\'"'):
-                        obj = classes_dict[class_name](**my_dict)
-                        for att_name, value in dct.items():
-                            setattr(obj, att_name.strip('\'"'), value.strip('\'"'))
-                        obj.save()
-                        c = False
-                        break
-                if c:
-                    print("** no instance found **")
+            print("** no instance found **")
 
     def do_count(self, line):
         """ count command """
@@ -223,32 +177,33 @@ class HBNBCommand(Cmd):
             from models import classes_dict
             if any(split_line[0] == key for key in classes_dict.keys()):
                 parsed = split_line[1].split("(")
-                parsed[1] = parsed[1].strip(")")
-                args = parsed[1].split(",")
-                args = [arg.strip() for arg in args]
-                if len(args) >= 3:
-                    temp = args[2]
-                    args = [arg.strip('"') for arg in args[:2]]
-                    args.append(temp)
-                else:
-                    args = [arg.strip('"') for arg in args]
+                args = ''
+                parsed[1] = parsed[1].replace("){}:,\"", '')
+                for c in parsed[1]:
+                    if c in "){}:,\'\"":
+                        continue
+                    args += c
+                args = args.split()
                 commands = {"all": HBNBCommand.do_all,
                             "show": HBNBCommand.do_show,
                             "destroy": HBNBCommand.do_destroy,
                             "update": HBNBCommand.do_update,
                             "count": HBNBCommand.do_count}
-                c: bool = True
                 for key, command in commands.items():
                     if key == parsed[0]:
-                        if key == 'update':
-                            reconstructed_args = extract_args(split_line[1])
-                        else:
-                            reconstructed_args = args.copy()
+                        reconstructed_args = args.copy()
                         reconstructed_args.insert(0, split_line[0])
-                        command(self, " ".join(reconstructed_args))
-                        c = False
+                        while True:
+                            command(self, " ".join(reconstructed_args))
+                            try:
+                                reconstructed_args.pop(2)
+                                reconstructed_args.pop(2)
+                            except IndexError:
+                                break
+                            if len(reconstructed_args) <= 3:
+                                break
                         break
-                if c:
+                else:
                     print(f"*** Unknown syntax: {line}")
             else:
                 print("** class doesn't exist **")
