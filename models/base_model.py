@@ -31,12 +31,7 @@ class BaseModel:
     def save(self) -> None:
         """ update """
         self.updated_at = datetime.now()
-        # try:
         from models import storage
-        # except ImportError:
-        #     import sys
-        #     print(sys.modules)
-        #     storage = sys.modules['models.storage']
         storage.new(self)
         storage.save()
 
