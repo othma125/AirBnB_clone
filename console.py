@@ -10,20 +10,20 @@ class HBNBCommand(Cmd):
     prompt = "(hbnb) "
 
     def do_EOF(self, line):
-        """EOF command"""
+        """Quit command to exit the program"""
         return True
 
     def do_quit(self, line):
-        """ quit command """
+        """Quit command to exit the program"""
         return True
 
-    def do_exit(self, line):
-        """ exit command """
-        return True
+    # def do_exit(self, line):
+    #     """Quit command to exit the program"""
+    #     return True
 
-    def emptyline(self):
-        """Ignore empty line"""
-        pass
+    # def emptyline(self):
+    #     """Ignore empty line"""
+    #     pass
 
     def do_create(self, line):
         """ create command """
