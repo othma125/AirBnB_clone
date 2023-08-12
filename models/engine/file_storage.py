@@ -6,11 +6,8 @@ import os.path
 
 class FileStorage:
     """FileStorage class"""
-
-    def __init__(self):
-        """constructor"""
-        self.__file_path: str = "file.json"
-        self.__objects: dict = {}
+    __file_path: str = "file.json"
+    __objects: dict = {}
 
     @property
     def file_path(self):
