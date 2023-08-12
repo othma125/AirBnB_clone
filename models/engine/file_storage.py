@@ -23,12 +23,12 @@ class FileStorage:
     def reload(self) -> None:
         """reload method"""
         if os.path.isfile(self.__file_path):
-            with open(self.__file_path, "r") as f:
+            with open(self.__file_path, "r", encoding="utf-8") as f:
                 self.__objects = load(f)
 
     def save(self) -> None:
         """save"""
-        with open(self.__file_path, "w") as f:
+        with open(self.__file_path, "w", encoding="utf-8") as f:
             dump(self.__objects, f)
 
     def new(self, obj) -> None:

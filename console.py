@@ -17,13 +17,13 @@ class HBNBCommand(Cmd):
         """Quit command to exit the program"""
         return True
 
-    # def do_exit(self, line):
-    #     """Quit command to exit the program"""
-    #     return True
+    def do_exit(self, line):
+        """Quit command to exit the program"""
+        return True
 
-    # def emptyline(self):
-    #     """Ignore empty line"""
-    #     pass
+    def emptyline(self):
+        """Ignore empty line"""
+        pass
 
     def do_create(self, line):
         """ create command """
