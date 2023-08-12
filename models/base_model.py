@@ -31,7 +31,12 @@ class BaseModel:
     def save(self) -> None:
         """ update """
         self.updated_at = datetime.now()
-        from models import storage
+        try:
+            from models import storage
+        except ImportError:
+            import sys
+            print(sys.modules)
+            storage = sys.modules['models.storage']
         storage.new(self)
         storage.save()
 
@@ -42,3 +47,14 @@ class BaseModel:
         my_dict.update({"created_at": str(self.created_at.isoformat())})
         my_dict.update({"updated_at": str(self.updated_at.isoformat())})
         return my_dict
+# my_model = BaseModel()
+# my_model.name = "My First Model"
+# my_model.my_number = 89
+# print(my_model)
+# my_model.save()
+# print(my_model)
+# my_model_json = my_model.to_dict()
+# print(my_model_json)
+# print("JSON of my_model:")
+# for key in my_model_json.keys():
+#     print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
