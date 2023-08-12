@@ -47,10 +47,6 @@ class TestUserMethods(TestCase):
         my_dict = self.user.to_dict()
         self.assertEqual(type(my_dict), dict)
         output = "{"
-        # output += f"'email': '{self.user.email}'"
-        # output += f", 'password': '{self.user.password}'"
-        # output += f", 'first_name': '{self.user.first_name}'"
-        # output += f", 'last_name': '{self.user.last_name}'"
         output += f"'id': '{self.user.id}'"
         output += f", 'created_at': '{self.user.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.user.updated_at.isoformat()}'"

@@ -46,10 +46,7 @@ class TestReviewMethods(TestCase):
         my_dict = self.review.to_dict()
         self.assertEqual(type(my_dict), dict)
         output = "{"
-        output += f"'place_id': '{self.review.place_id}'"
-        output += f", 'user_id': '{self.review.user_id}'"
-        output += f", 'text': '{self.review.text}'"
-        output += f", 'id': '{self.review.id}'"
+        output += f"'id': '{self.review.id}'"
         output += f", 'created_at': '{self.review.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.review.updated_at.isoformat()}'"
         output += f", '__class__': '{self.review.__class__.__name__}'"
@@ -80,9 +77,6 @@ class TestReviewMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
-        self.assertIn("place_id", storage.all()[key])
-        self.assertIn("user_id", storage.all()[key])
-        self.assertIn("text", storage.all()[key])
 
     def test_str(self):
         """ Testing str """

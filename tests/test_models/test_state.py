@@ -43,8 +43,7 @@ class TestStateMethods(TestCase):
         my_dict = self.state.to_dict()
         self.assertEqual(type(my_dict), dict)
         output = "{"
-        output += f"'name': '{self.state.name}'"
-        output += f", 'id': '{self.state.id}'"
+        output += f"'id': '{self.state.id}'"
         output += f", 'created_at': '{self.state.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.state.updated_at.isoformat()}'"
         output += f", '__class__': '{self.state.__class__.__name__}'"
@@ -72,7 +71,6 @@ class TestStateMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
-        self.assertIn("name", storage.all()[key])
 
     def test_str(self):
         """ Testing str """

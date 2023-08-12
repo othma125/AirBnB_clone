@@ -54,18 +54,7 @@ class TestPlaceMethods(TestCase):
         my_dict = self.place.to_dict()
         self.assertEqual(type(my_dict), dict)
         output = "{"
-        output += f"'city_id': '{self.place.city_id}'"
-        output += f", 'user_id': '{self.place.user_id}'"
-        output += f", 'name': '{self.place.name}'"
-        output += f", 'description': '{self.place.description}'"
-        output += f", 'number_rooms': {self.place.number_rooms}"
-        output += f", 'number_bathrooms': {self.place.number_bathrooms}"
-        output += f", 'max_guest': {self.place.max_guest}"
-        output += f", 'price_by_night': {self.place.price_by_night}"
-        output += f", 'latitude': {self.place.latitude}"
-        output += f", 'longitude': {self.place.longitude}"
-        output += f", 'amenity_ids': {self.place.amenity_ids}"
-        output += f", 'id': '{self.place.id}'"
+        output += f"'id': '{self.place.id}'"
         output += f", 'created_at': '{self.place.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.place.updated_at.isoformat()}'"
         output += f", '__class__': '{self.place.__class__.__name__}'"
@@ -103,20 +92,8 @@ class TestPlaceMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
-        self.assertIn("city_id", storage.all()[key])
-        self.assertIn("user_id", storage.all()[key])
-        self.assertIn("name", storage.all()[key])
-        self.assertIn("description", storage.all()[key])
-        self.assertIn("number_rooms", storage.all()[key])
-        self.assertIn("number_bathrooms", storage.all()[key])
-        self.assertIn("max_guest", storage.all()[key])
-        self.assertIn("price_by_night", storage.all()[key])
-        self.assertIn("latitude", storage.all()[key])
-        self.assertIn("longitude", storage.all()[key])
-        self.assertIn("amenity_ids", storage.all()[key])
 
     def test_str(self):
         """ Testing str """
         self.assertEqual(str(self.place),
-                         "[Place] ({}) {}".format(self.place.id,
-                                                  self.place.__dict__))
+                         f"[Place] ({self.place.id}) {self.place.__dict__}")

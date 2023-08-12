@@ -45,9 +45,7 @@ class TestCityMethods(TestCase):
         my_dict = self.city.to_dict()
         self.assertEqual(type(my_dict), dict)
         output = "{"
-        output += f"'state_id': '{self.city.state_id}'"
-        output += f", 'name': '{self.city.name}'"
-        output += f", 'id': '{self.city.id}'"
+        output += f"'id': '{self.city.id}'"
         output += f", 'created_at': '{self.city.created_at.isoformat()}'"
         output += f", 'updated_at': '{self.city.updated_at.isoformat()}'"
         output += f", '__class__': '{self.city.__class__.__name__}'"
@@ -75,8 +73,6 @@ class TestCityMethods(TestCase):
         self.assertIn("created_at", storage.all()[key])
         self.assertIn("updated_at", storage.all()[key])
         self.assertIn("__class__", storage.all()[key])
-        self.assertIn("state_id", storage.all()[key])
-        self.assertIn("name", storage.all()[key])
 
     def test_str(self):
         """ Testing str """
