@@ -263,7 +263,7 @@ class TestConsole(unittest.TestCase):
         HBNBCommand().onecmd(cmd1 + cmd2)
         self.assertFalse(hasattr(obj, "age"))
         self.assertFalse(hasattr(obj, "height"))
-
+    
     def test_all(self):
         """ Test all"""
         obj1 = User()
