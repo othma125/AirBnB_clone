@@ -277,7 +277,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-    
     def test_all_with_valid_class(self):
         """ Test ``all`` with valid class"""
         test_inst1 = User()
@@ -301,7 +300,6 @@ class TestConsole(unittest.TestCase):
             self.assertTrue(output.startswith('["'))
             self.assertTrue(output.endswith('"]'))
 
-   
     def test_all_with_noexistent_class(self):
         """ Test ``all`` with noexistent class"""
         with patch("sys.stdout", new=StringIO()) as f:
@@ -309,8 +307,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
 
-    
-    
     def test_update_with_class(self):
         """ Test ``update`` with a class"""
         test_inst = User()
@@ -318,7 +314,6 @@ class TestConsole(unittest.TestCase):
         cmd = f"update User {test_inst.id} __class__ 'not allowed'"
         self.assertNotEqual(test_inst.__class__, "not allowed")
 
-    
     def test_update_with_missing_class_name(self):
         """ Test ``update`` with missing class name"""
         with patch("sys.stdout", new=StringIO()) as f:
@@ -340,7 +335,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
 
-    
     def test_update_with_missing_attribute_name(self):
         """ Test ``update`` with attribut name"""
         test_inst = User()
@@ -518,7 +512,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-    
     #     self.assertEqual(type(test_inst.text), str)
 
 
