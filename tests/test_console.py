@@ -414,4 +414,4 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** no instance found **")
 
    
-    #     cmd
+    #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
