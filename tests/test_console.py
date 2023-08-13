@@ -203,35 +203,41 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** class doesn't exist **")
 
     def test_update(self) -> None:
-        """ Test update"""
+        """Test that the update command updates instances of the specified classes."""
         obj = User()
         obj.save()
         cmd = f"update User {obj.id} __class__ 'not allowed'"
         self.assertNotEqual(obj.__class__, "not allowed")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("update")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class name missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("update MyModel")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel")
             output = f.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
+
         obj = User()
         obj.save()
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd(f"update User {obj.id}")
             output = f.getvalue().strip()
             self.assertEqual(output, "** attribute name missing **")
+
         obj = User()
         obj.save()
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd(f"update User {obj.id} name")
             output = f.getvalue().strip()
             self.assertEqual(output, "** value missing **")
+
         obj = User()
         obj.save()
         cmd1 = f"update User {obj.id} name 'malibu smith' "
