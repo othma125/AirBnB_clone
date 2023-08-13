@@ -415,4 +415,3 @@ class TestConsole(unittest.TestCase):
 
    
     #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
-
