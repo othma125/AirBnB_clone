@@ -518,33 +518,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-   
-
-    # def test_update_with_city_attr3(self):
-    #     """ Test ``update`` with ``city`` attribute"""
-    #     test_inst = City()
-    #     test_inst.save()
-    #     attr_dict = {"state_id": "the id", "name": "roma"}
-    #     cmd = f"City.update({test_inst.id}, {attr_dict})"
-    #     HBNBCommand().onecmd(cmd)
-    #     self.assertTrue(hasattr(test_inst, "state_id"))
-    #     self.assertEqual(test_inst.state_id, "the id")
-    #     self.assertEqual(type(test_inst.state_id), str)
-    #     self.assertTrue(hasattr(test_inst, "name"))
-    #     self.assertEqual(test_inst.name, "roma")
-    #     self.assertEqual(type(test_inst.name), str)
-
-    # def test_update_with_amenity_attr3(self):
-    #     """ Test ``update`` with ``amenity`` attribute"""
-    #     test_inst = Amenity()
-    #     test_inst.save()
-    #     attr_dict = {"name": "sea side"}
-    #     cmd = f"Amenity.update({test_inst.id}, {attr_dict})"
-    #     HBNBCommand().onecmd(cmd)
-    #     self.assertTrue(hasattr(test_inst, "name"))
-    #     self.assertEqual(test_inst.name, "sea side")
-    #     self.assertEqual(type(test_inst.name), str)
-
     # def test_update_with_place_attr3(self):
     #     """ Test ``update`` with ``place`` attribute"""
     #     test_inst = Place()
