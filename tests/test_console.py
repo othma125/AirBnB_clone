@@ -521,22 +521,6 @@ class TestConsole(unittest.TestCase):
     # def test_update_with_Review_attr3(self):
     #     """ Test ``update`` with ``place`` review"""
     #     test_inst = Review()
-    #     test_inst.save()
-    #     attr_dict = {"place_id": "a random id", "user_id": "a random user id"}
-    #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
-    #     HBNBCommand().onecmd(cmd)
-    #     self.assertTrue(hasattr(test_inst, "place_id"))
-    #     self.assertEqual(test_inst.place_id, "a random id")
-    #     self.assertEqual(type(test_inst.place_id), str)
-    #     self.assertTrue(hasattr(test_inst, "user_id"))
-    #     self.assertEqual(test_inst.user_id, "a random user id")
-    #     self.assertEqual(type(test_inst.user_id), str)
-    #     attr_dict = {"text": "this is so boring"}
-    #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
-    #     HBNBCommand().onecmd(cmd)
-    #     self.assertTrue(hasattr(test_inst, "text"))
-    #     self.assertEqual(test_inst.text, "this is so boring")
-    #     self.assertEqual(type(test_inst.text), str)
 
 
 if __name__ == "__main__":
