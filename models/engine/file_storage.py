@@ -19,9 +19,11 @@ class FileStorage:
 
     def reload(self) -> None:
         """reload method"""
-        if os.path.isfile(self.__file_path):
+        try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                self.__objects = load(f)
+                __objects = load(f)
+        except FileNotFoundError:
+            pass
 
     def save(self) -> None:
         """save"""
