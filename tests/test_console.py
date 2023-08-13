@@ -13,10 +13,8 @@ import console
 class TestConsole(unittest.TestCase):
     def setUp(self):
         """ Create file at the beginning of every test"""
-        try:
+        if os.path.exists("file.json"):
             os.remove("file.json")
-        except IOError:
-            pass
         FileStorage._FileStorage__objects = {}
 
     def tearDown(self):
