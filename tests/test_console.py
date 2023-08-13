@@ -123,14 +123,11 @@ class TestConsole(unittest.TestCase):
 
     def test_module_doc(self) -> None:
         """ Test for module documentation"""
-        self.assertIsNotNone(console.__doc__)
+        self.assertIsNotNone(console.__doc__)  
 
-    def test_class_doc(self) -> None:
-        """ Test for class documentation"""
-        self.assertIsNotNone(HBNBCommand.__doc__)
-
-    def test_method_docs(self) -> None:
+    def test_docs(self) -> None:
         """Test all methods in ``console`` for docs"""
+        self.assertIsNotNone(HBNBCommand.__doc__)
         methods = [
             HBNBCommand.do_EOF,
             HBNBCommand.do_exit,
