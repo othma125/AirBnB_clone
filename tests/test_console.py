@@ -303,7 +303,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** class doesn't exist **")
 
     def test_count(self) -> None:
-        """Test that the count command returns the number of instances of the specified classes."""
+        """Test that the count command returns the number
+        of instances of the specified classes."""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("MyModel.count()")
             output = f.getvalue().strip()
