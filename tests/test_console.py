@@ -43,21 +43,11 @@ class TestConsole(unittest.TestCase):
         """Test all methods in ``console`` for docs"""
         methods = [
             HBNBCommand.do_EOF,
-            #HBNBCommand.help_EOF,
             HBNBCommand.do_quit,
-            # HBNBCommand.help_quit,
-            # HBNBCommand.emptyline,
-            # HBNBCommand.is_valid,
-            # HBNBCommand.value_type,
             HBNBCommand.do_create,
-            # HBNBCommand.help_create,
             HBNBCommand.do_show,
-            # HBNBCommand.help_show,
             HBNBCommand.do_destroy,
-            # HBNBCommand.help_destroy,
             HBNBCommand.do_all,
-            # HBNBCommand.help_all,
-            # HBNBCommand.count,
             HBNBCommand.do_update,
             HBNBCommand.default,
         ]
@@ -287,31 +277,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-    # def test_all_with_no_class(self):
-    #     """ Test all with no class"""
-    #     test_inst1 = User()
-    #     test_inst1.save()
-    #     test_inst2 = User()
-    #     test_inst2.save()
-    #     test_inst3 = User()
-    #     test_inst2.save()
-    #     test_inst4 = Place()
-    #     test_inst4.save()
-    #     test_inst5 = Place()
-    #     test_inst5.save()
-    #     with patch("sys.stdout", new=StringIO()) as f:
-    #         HBNBCommand().onecmd("all")
-    #         output = f.getvalue().strip()
-    #         self.assertIn(f"[User] ({test_inst1.id})", output)
-    #         self.assertIn(f"[User] ({test_inst2.id})", output)
-    #         self.assertIn(f"[User] ({test_inst3.id})", output)
-    #         self.assertIn(f"[Place] ({test_inst4.id})", output)
-    #         self.assertIn(f"[Place] ({test_inst5.id})", output)
-    #         self.assertNotIn(f"[Basemodel]", output)
-    #         self.assertNotIn(f"[City]", output)
-    #         self.assertTrue(output.startswith('["'))
-    #         self.assertTrue(output.endswith('"]'))
-
+    
     def test_all_with_valid_class(self):
         """ Test ``all`` with valid class"""
         test_inst1 = User()
@@ -335,13 +301,7 @@ class TestConsole(unittest.TestCase):
             self.assertTrue(output.startswith('["'))
             self.assertTrue(output.endswith('"]'))
 
-    # def test_all_with_empty_class(self):
-    #     """ Test ``all`` with empty class"""
-    #     with patch("sys.stdout", new=StringIO()) as f:
-    #         HBNBCommand().onecmd("all User")
-    #         output = f.getvalue().strip()
-    #         self.assertEqual(output, "[]")
-
+   
     def test_all_with_noexistent_class(self):
         """ Test ``all`` with noexistent class"""
         with patch("sys.stdout", new=StringIO()) as f:
@@ -349,16 +309,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
 
-    # def test_update_with_valid_input_str(self):
-    #     """ Test ``update`` with valid input string"""
-    #     test_inst = User()
-    #     test_inst.save()
-    #     cmd = f"update User {test_inst.id} name malibu"
-    #     HBNBCommand().onecmd(cmd)
-    #     self.assertTrue(hasattr(test_inst, "name"))
-    #     self.assertEqual(test_inst.name, "malibu")
-    #     self.assertEqual(type(test_inst.name), str)
-
+    
     # def test_update_with_valid_input_int(self):
     #     """ Test ``update`` with a valid input(int)"""
     #     test_inst = User()
