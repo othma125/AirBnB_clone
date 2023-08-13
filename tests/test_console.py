@@ -128,11 +128,10 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(out.getvalue().strip(), "")
 
     def test_empty_line(self) -> None:
-        """ Test empty_line"""
-        with patch("sys.stdout", new=StringIO()) as f:
+        """Test that the empty line command does not produce any output."""
+        with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "")
+            self.assertEqual(out.getvalue().strip(), "")
 
     def test_create(self) -> None:
         """ Test create"""
