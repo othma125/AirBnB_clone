@@ -23,6 +23,8 @@ class BaseModel:
             self.id: str = str(uuid4())
             self.created_at: datetime = datetime.now()
             self.updated_at: datetime = self.created_at
+            from models import storage
+            storage.new(self)
 
     def __str__(self) -> str:
         """to string"""
