@@ -455,7 +455,6 @@ class TestConsole(unittest.TestCase):
 
    
     #     self.assertEqual(type(test_inst.user_id), str)
-    #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
 
 
 if __name__ == "__main__":
