@@ -70,18 +70,13 @@ class TestBaseMethods(TestCase):
         self.assertEqual(type(basemodel.updated_at), datetime)
         self.assertTrue(basemodel.updated_at >= basemodel.created_at)
 
-    # def test_save(self):
-    #     """ Testing save """
-    #     self.model.save()
-    #     key = self.model.__class__.__name__ + "." + self.model.id
-    #     from models import storage
-    #     self.assertIn(key, storage.all())
-    #     self.assertEqual(storage.all()[key], self.model.to_dict())
-    #     # test all attributes exist
-    #     self.assertIn("id", storage.all()[key])
-    #     self.assertIn("created_at", storage.all()[key])
-    #     self.assertIn("updated_at", storage.all()[key])
-    #     self.assertIn("__class__", storage.all()[key])
+    def test_save(self):
+        """ Testing save """
+        self.model.save()
+        key = self.model.__class__.__name__ + "." + self.model.id
+        from models import storage
+        self.assertIn(key, storage.all())
+        self.assertEqual(storage.all()[key], self.model)
 
     def test_str(self):
         """ Testing str """

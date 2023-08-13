@@ -61,18 +61,13 @@ class TestCityMethods(TestCase):
         self.assertEqual(type(city.created_at), datetime)
         self.assertEqual(type(city.updated_at), datetime)
 
-    # def test_save(self):
-    #     """ Testing save """
-    #     self.city.save()
-    #     key = self.city.__class__.__name__ + "." + str(self.city.id)
-    #     from models import storage
-    #     self.assertIn(key, storage.all())
-    #     self.assertEqual(storage.all()[key], self.city.to_dict())
-    #     # test all attributes exist
-    #     self.assertIn("id", storage.all()[key])
-    #     self.assertIn("created_at", storage.all()[key])
-    #     self.assertIn("updated_at", storage.all()[key])
-    #     self.assertIn("__class__", storage.all()[key])
+    def test_save(self):
+        """ Testing save """
+        self.city.save()
+        key = self.city.__class__.__name__ + "." + str(self.city.id)
+        from models import storage
+        self.assertIn(key, storage.all())
+        self.assertEqual(storage.all()[key], self.city)
 
     def test_str(self):
         """ Testing str """
