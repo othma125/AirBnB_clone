@@ -23,56 +23,23 @@ class TestConsole(unittest.TestCase):
             os.remove("file.json")
 
     def test_help(self) -> None:
-        """ Test help command """
-        output = " show command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help show")
-            self.assertEqual(out.getvalue(), output)
-        output = " create command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help create")
-            self.assertEqual(out.getvalue(), output)
-        output = " all command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help all")
-            self.assertEqual(out.getvalue(), output)
-        output = " update command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help update")
-            self.assertEqual(out.getvalue(), output)
-        output = " destroy command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help destroy")
-            self.assertEqual(out.getvalue(), output)
-        output = " count command \n"
-        with patch("sys.stdout", new=StringIO()) as out:
-            HBNBCommand().onecmd("help count")
-            self.assertEqual(out.getvalue(), output)
+        """Test help command"""
+        commands = ["show", "create", "all", "update", "destroy", "count"]
+        for command in commands:
+            output = f" {command} command \n"
+            with patch("sys.stdout", new=StringIO()) as out:
+                HBNBCommand().onecmd(f"help {command}")
+                self.assertEqual(out.getvalue(), output)
         output = ""
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("quit")
             self.assertEqual(out.getvalue(), output)
 
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help create")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help show")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help destroy")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help all")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help update")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
+        for command in commands:
+            with patch("sys.stdout", new=StringIO()) as f:
+                HBNBCommand().onecmd(f"help {command}")
+                output = f.getvalue().strip()
+                self.assertIsNotNone(output)
 
     def test_error_messages(self) -> None:
         """ Test error commands """
