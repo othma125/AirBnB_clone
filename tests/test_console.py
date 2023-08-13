@@ -57,6 +57,27 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("quit")
             self.assertEqual(out.getvalue(), output)
 
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help create")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help show")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help destroy")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help all")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help update")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+
     def test_error_messages(self) -> None:
         """ Test error commands """
         output = "** class name missing **\n"
@@ -144,29 +165,6 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("")
             output = f.getvalue().strip()
             self.assertEqual(output, "")
-
-    def test_help(self):
-        """ Test help"""
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help create")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help show")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help destroy")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help all")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help update")
-            output = f.getvalue().strip()
-            self.assertIsNotNone(output)
 
     def test_create(self):
         """ Test create"""
