@@ -42,7 +42,8 @@ class TestConsole(unittest.TestCase):
                 self.assertIsNotNone(output)
 
     def test_error_messages(self) -> None:
-        """Test that error messages are displayed for invalid commands and arguments."""
+        """Test that error messages are displayed
+        for invalid commands and arguments."""
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("show")
@@ -92,9 +93,10 @@ class TestConsole(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("update User")
             self.assertEqual(out.getvalue(), output)
-        
+
     def test_docs(self) -> None:
-        """Test that all methods in the console module and HBNBCommand class have docstrings."""
+        """Test that all methods in the console module
+        and HBNBCommand class have docstrings."""
         self.assertIsNotNone(console.__doc__)
         self.assertIsNotNone(HBNBCommand.__doc__)
         methods = [
@@ -112,19 +114,18 @@ class TestConsole(unittest.TestCase):
             self.assertIsNotNone(method.__doc__)
 
     def test_quit(self) -> None:
-        """ Test quit"""
-        with patch("sys.stdout", new=StringIO()) as f:
+        """Test that the quit, EOF, and exit commands exit the console."""
+        with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("quit")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "")
-        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertEqual(out.getvalue().strip(), "")
+
+        with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("EOF")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "")
-        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertEqual(out.getvalue().strip(), "")
+
+        with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("exit")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "")
+            self.assertEqual(out.getvalue().strip(), "")
 
     def test_empty_line(self) -> None:
         """ Test empty_line"""
@@ -230,7 +231,7 @@ class TestConsole(unittest.TestCase):
         HBNBCommand().onecmd(cmd1 + cmd2)
         self.assertFalse(hasattr(obj, "age"))
         self.assertFalse(hasattr(obj, "height"))
-    
+
     def test_all(self) -> None:
         """ Test all"""
         obj1 = User()
@@ -386,5 +387,4 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-   
     #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
