@@ -339,7 +339,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "1")
 
     def test_show(self) -> None:
-        """ Test show"""
+        """Test that the show command displays information about the specified instance."""
         obj = User()
         obj.save()
         cmd = f"User.show({obj.id})"
@@ -353,14 +353,17 @@ class TestConsole(unittest.TestCase):
             self.assertNotIn("__class__", output)
             self.assertFalse(output.startswith('["'))
             self.assertFalse(output.endswith('"]'))
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("MyModel.show()")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("User.show()")
             output = f.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("User.show(121212)")
             output = f.getvalue().strip()
