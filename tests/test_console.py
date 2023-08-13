@@ -114,6 +114,7 @@ class TestConsole(TestCase):
         """Test all methods in ``console`` for docs"""
         methods = [
             HBNBCommand.do_EOF,
+            HBNBCommand.do_exit,
             HBNBCommand.do_quit,
             HBNBCommand.do_create,
             HBNBCommand.do_show,
@@ -132,6 +133,10 @@ class TestConsole(TestCase):
             self.assertEqual(output, "")
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("EOF")
+            output = f.getvalue().strip()
+            self.assertEqual(output, "")
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("exit")
             output = f.getvalue().strip()
             self.assertEqual(output, "")
 
