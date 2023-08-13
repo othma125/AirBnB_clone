@@ -121,12 +121,9 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("update User")
             self.assertEqual(out.getvalue(), output)
 
-    def test_module_doc(self) -> None:
-        """ Test for module documentation"""
-        self.assertIsNotNone(console.__doc__)  
-
     def test_docs(self) -> None:
         """Test all methods in ``console`` for docs"""
+        self.assertIsNotNone(console.__doc__) 
         self.assertIsNotNone(HBNBCommand.__doc__)
         methods = [
             HBNBCommand.do_EOF,
