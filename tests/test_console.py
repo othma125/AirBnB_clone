@@ -42,48 +42,57 @@ class TestConsole(unittest.TestCase):
                 self.assertIsNotNone(output)
 
     def test_error_messages(self) -> None:
-        """ Test error commands """
+        """Test that error messages are displayed for invalid commands and arguments."""
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("show")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("create")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("update")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("destroy")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("create my_class")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("show my_class")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("destroy my_class")
             self.assertEqual(out.getvalue(), output)
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("update my_class")
             self.assertEqual(out.getvalue(), output)
+
         output = "** instance id missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("show User")
             self.assertEqual(out.getvalue(), output)
+
         output = "** instance id missing **\n"
         with patch("sys.stdout", new=StringIO()) as out:
             HBNBCommand().onecmd("update User")
             self.assertEqual(out.getvalue(), output)
-
+        
     def test_docs(self) -> None:
         """Test all methods in ``console`` for docs"""
         self.assertIsNotNone(console.__doc__) 
