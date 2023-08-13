@@ -19,10 +19,8 @@ class TestConsole(unittest.TestCase):
 
     def tearDown(self):
         """ Delete created file after every test"""
-        try:
+        if os.path.exists("file.json"):
             os.remove("file.json")
-        except IOError:
-            pass
 
     def test_help(self) -> None:
         """ Test help command """
