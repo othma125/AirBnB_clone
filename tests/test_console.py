@@ -454,10 +454,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** no instance found **")
 
    
-    #     self.assertEqual(type(test_inst.user_id), str)
-    #     attr_dict = {"text": "this is so boring"}
-    #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
-    #     HBNBCommand().onecmd(cmd)
+    
     #     self.assertTrue(hasattr(test_inst, "text"))
     #     self.assertEqual(test_inst.text, "this is so boring")
     #     self.assertEqual(type(test_inst.text), str)
