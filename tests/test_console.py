@@ -43,7 +43,7 @@ class TestConsole(unittest.TestCase):
         """Test all methods in ``console`` for docs"""
         methods = [
             HBNBCommand.do_EOF,
-            #HBNBCommand.help_EOF,
+            # HBNBCommand.help_EOF,
             HBNBCommand.do_quit,
             # HBNBCommand.help_quit,
             # HBNBCommand.emptyline,
