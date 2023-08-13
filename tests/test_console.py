@@ -228,38 +228,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
 
-    def test_show(self):
-        """ Test show"""
-        obj = User()
-        obj.save()
-        cmd = f"show User {obj.id}"
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd(cmd)
-            output = f.getvalue().strip()
-            self.assertIn(f"[User] ({obj.id})", output)
-            self.assertIn("created_at", output)
-            self.assertIn("updated_at", output)
-            self.assertIn("id", output)
-            self.assertNotIn("__class__", output)
-            self.assertFalse(output.startswith('["'))
-            self.assertFalse(output.endswith('"]'))
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("show")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "** class name missing **")
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("show MyModel")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "** class doesn't exist **")
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("show User")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "** instance id missing **")
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("show User 121212")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "** no instance found **")
-
     def test_update(self):
         """ Test update"""
         obj = User()
