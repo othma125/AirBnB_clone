@@ -203,7 +203,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** class doesn't exist **")
 
     def test_update(self) -> None:
-        """Test that the update command updates instances of the specified classes."""
+        """Test that the update command updates
+        instances of the specified classes."""
         obj = User()
         obj.save()
         cmd = f"update User {obj.id} __class__ 'not allowed'"
@@ -247,7 +248,8 @@ class TestConsole(unittest.TestCase):
         self.assertFalse(hasattr(obj, "height"))
 
     def test_all(self) -> None:
-        """ Test all"""
+        """Test that the all command lists all
+        instances of the specified classes."""
         obj1 = User()
         obj1.save()
         obj2 = User()
@@ -257,6 +259,7 @@ class TestConsole(unittest.TestCase):
         obj4.save()
         obj5 = Place()
         obj5.save()
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("User.all()")
             output = f.getvalue().strip()
@@ -267,10 +270,12 @@ class TestConsole(unittest.TestCase):
             self.assertNotIn(f"[City]", output)
             self.assertTrue(output.startswith('["'))
             self.assertTrue(output.endswith('"]'))
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("model.all()")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
         obj1 = User()
         obj1.save()
         obj2 = User()
@@ -280,6 +285,7 @@ class TestConsole(unittest.TestCase):
         obj4.save()
         obj5 = Place()
         obj5.save()
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("all User")
             output = f.getvalue().strip()
@@ -290,6 +296,7 @@ class TestConsole(unittest.TestCase):
             self.assertNotIn(f"[City]", output)
             self.assertTrue(output.startswith('["'))
             self.assertTrue(output.endswith('"]'))
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("all MyModel")
             output = f.getvalue().strip()
