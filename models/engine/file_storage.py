@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Module that contains class FileStorage """
 from json import load, dump
-import os.path
 
 
 class FileStorage:
@@ -21,7 +20,7 @@ class FileStorage:
         """reload method"""
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                __objects = load(f)
+                self.__objects = load(f)
         except FileNotFoundError:
             pass
 
