@@ -26,7 +26,7 @@ class TestConsole(unittest.TestCase):
         except IOError:
             pass
 
-    def test_help_command(self) -> None:
+    def test_help(self) -> None:
         """ Test help command """
         output = " show command \n"
         with patch("sys.stdout", new=StringIO()) as out:
@@ -121,15 +121,15 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("update User")
             self.assertEqual(out.getvalue(), output)
 
-    def test_module_doc(self):
+    def test_module_doc(self) -> None:
         """ Test for module documentation"""
         self.assertIsNotNone(console.__doc__)
 
-    def test_class_doc(self):
+    def test_class_doc(self) -> None:
         """ Test for class documentation"""
         self.assertIsNotNone(HBNBCommand.__doc__)
 
-    def test_method_docs(self):
+    def test_method_docs(self) -> None:
         """Test all methods in ``console`` for docs"""
         methods = [
             HBNBCommand.do_EOF,
@@ -144,7 +144,7 @@ class TestConsole(unittest.TestCase):
         for meth in methods:
             self.assertIsNotNone(meth.__doc__)
 
-    def test_quit(self):
+    def test_quit(self) -> None:
         """ Test quit"""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("quit")
@@ -159,14 +159,14 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "")
 
-    def test_empty_line(self):
+    def test_empty_line(self) -> None:
         """ Test empty_line"""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("")
             output = f.getvalue().strip()
             self.assertEqual(output, "")
 
-    def test_create(self):
+    def test_create(self) -> None:
         """ Test create"""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
@@ -226,7 +226,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
 
-    def test_update(self):
+    def test_update(self) -> None:
         """ Test update"""
         obj = User()
         obj.save()
@@ -264,7 +264,7 @@ class TestConsole(unittest.TestCase):
         self.assertFalse(hasattr(obj, "age"))
         self.assertFalse(hasattr(obj, "height"))
     
-    def test_all(self):
+    def test_all(self) -> None:
         """ Test all"""
         obj1 = User()
         obj1.save()
@@ -313,7 +313,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
 
-    def test_count(self):
+    def test_count(self) -> None:
         """ Test count"""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("MyModel.count()")
@@ -344,7 +344,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "1")
 
-    def test_show(self):
+    def test_show(self) -> None:
         """ Test show"""
         obj = User()
         obj.save()
@@ -372,7 +372,7 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-    def test_destroy(self):
+    def test_destroy(self) -> None:
         """ Test destroy"""
         obj = User()
         obj.save()
@@ -422,6 +422,3 @@ class TestConsole(unittest.TestCase):
    
     #     cmd = f"Review.update({test_inst.id}, {attr_dict})"
 
-
-if __name__ == "__main__":
-    unittest.main()
