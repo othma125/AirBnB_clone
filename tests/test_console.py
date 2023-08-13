@@ -339,7 +339,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "1")
 
     def test_show(self) -> None:
-        """Test that the show command displays information about the specified instance."""
+        """Test that the show command displays information
+        about the specified instance."""
         obj = User()
         obj.save()
         cmd = f"User.show({obj.id})"
@@ -370,7 +371,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(output, "** no instance found **")
 
     def test_destroy(self) -> None:
-        """ Test destroy"""
+        """Test that the destroy command deletes the specified instance."""
         obj = User()
         obj.save()
         cmd = f"User.destroy({obj.id})"
@@ -379,18 +380,22 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd(f"show User {obj.id}")
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("MyModel.destroy()")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.destroy()")
             output = f.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.destroy(121212)")
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
+
         obj = User()
         obj.save()
         cmd = f"destroy User {obj.id}"
@@ -399,18 +404,22 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd(f"show User {obj.id}")
             output = f.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("destroy")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class name missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("destroy MyModel")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel")
             output = f.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel 121212")
             output = f.getvalue().strip()
