@@ -94,8 +94,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(out.getvalue(), output)
         
     def test_docs(self) -> None:
-        """Test all methods in ``console`` for docs"""
-        self.assertIsNotNone(console.__doc__) 
+        """Test that all methods in the console module and HBNBCommand class have docstrings."""
+        self.assertIsNotNone(console.__doc__)
         self.assertIsNotNone(HBNBCommand.__doc__)
         methods = [
             HBNBCommand.do_EOF,
@@ -106,9 +106,10 @@ class TestConsole(unittest.TestCase):
             HBNBCommand.do_destroy,
             HBNBCommand.do_all,
             HBNBCommand.do_update,
-            HBNBCommand.default]
-        for meth in methods:
-            self.assertIsNotNone(meth.__doc__)
+            HBNBCommand.default
+        ]
+        for method in methods:
+            self.assertIsNotNone(method.__doc__)
 
     def test_quit(self) -> None:
         """ Test quit"""
