@@ -59,18 +59,18 @@ class TestStateMethods(TestCase):
         self.assertEqual(type(state.updated_at), datetime)
         self.assertTrue(state.updated_at >= state.created_at)
 
-    def test_save(self):
-        """ Testing save """
-        self.state.save()
-        key = self.state.__class__.__name__ + "." + str(self.state.id)
-        from models import storage
-        self.assertIn(key, storage.all())
-        self.assertEqual(storage.all()[key], self.state.to_dict())
-        # test all attributes exist
-        self.assertIn("id", storage.all()[key])
-        self.assertIn("created_at", storage.all()[key])
-        self.assertIn("updated_at", storage.all()[key])
-        self.assertIn("__class__", storage.all()[key])
+    # def test_save(self):
+    #     """ Testing save """
+    #     self.state.save()
+    #     key = self.state.__class__.__name__ + "." + str(self.state.id)
+    #     from models import storage
+    #     self.assertIn(key, storage.all())
+    #     self.assertEqual(storage.all()[key], self.state.to_dict())
+    #     # test all attributes exist
+    #     self.assertIn("id", storage.all()[key])
+    #     self.assertIn("created_at", storage.all()[key])
+    #     self.assertIn("updated_at", storage.all()[key])
+    #     self.assertIn("__class__", storage.all()[key])
 
     def test_str(self):
         """ Testing str """

@@ -57,11 +57,9 @@ class HBNBCommand(Cmd):
             print("** instance id missing **")
             return
         from models import storage
-        for my_dict in storage.all().values():
-            if my_dict['__class__'] == class_name.strip("'\"") \
-                    and my_dict['id'] == identifier.strip("'\""):
-                class_name = my_dict["__class__"]
-                obj = classes_dict[class_name](**my_dict)
+        for obj in storage.all().values():
+            if obj.__class__.__name__ == class_name.strip("'\"") \
+                    and obj.id == identifier.strip("'\""):
                 print(str(obj))
                 break
         else:
@@ -76,15 +74,13 @@ class HBNBCommand(Cmd):
             if all(line != key for key in classes_dict.keys()):
                 print("** class doesn't exist **")
                 return
-            for key, my_dict in storage.all().items():
+            for key, obj in storage.all().items():
                 class_name, _ = key.split('.')
-                if my_dict['__class__'] == line:
-                    obj = classes_dict[line](**my_dict)
+                if class_name == line:
                     res.append(str(obj))
         else:
-            for key, my_dict in storage.all().items():
+            for key, obj in storage.all().items():
                 class_name, _ = key.split('.')
-                obj = classes_dict[class_name](**my_dict)
                 res.append(str(obj))
         print(res)
 
@@ -104,9 +100,9 @@ class HBNBCommand(Cmd):
             print("** instance id missing **")
             return
         from models import storage
-        for key, my_dict in storage.all().items():
-            if my_dict['__class__'] == class_name.strip("'\"") \
-                    and my_dict['id'] == identifier.strip("'\""):
+        for key, obj in storage.all().items():
+            if obj.__class__.__name__ == class_name.strip("'\"") \
+                    and obj.id == identifier.strip("'\""):
                 storage.all().pop(key)
                 storage.save()
                 break
@@ -138,11 +134,10 @@ class HBNBCommand(Cmd):
             print("** value missing **")
             return
         from models import storage
-        for key, my_dict in storage.all().items():
+        for key, obj in storage.all().items():
             name, i = key.split(".")
             if name == class_name.strip("'\"")\
                     and i == identifier.strip('\'"'):
-                obj = classes_dict[class_name](**my_dict)
                 setattr(obj, att_name.strip('{\'"'), value.strip(',}\'"'))
                 obj.save()
                 break
@@ -158,9 +153,9 @@ class HBNBCommand(Cmd):
             if all(line != key for key in classes_dict.keys()):
                 print("** class doesn't exit **")
                 return
-            for key, my_dict in storage.all().items():
+            for key, obj in storage.all().items():
                 class_name, _ = key.split('.')
-                if my_dict['__class__'] == line:
+                if obj.__class__.__name__ == line:
                     count += 1
         else:
             count = len(storage.all())

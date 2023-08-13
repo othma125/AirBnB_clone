@@ -20,16 +20,23 @@ class FileStorage:
         """reload method"""
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                self.__objects = load(f)
+                loaded_dict = load(f)
+            from models import classes_dict
+            for key, my_dict in loaded_dict.items():
+                class_name, _ = key.split('.')
+                obj = classes_dict[class_name](**my_dict)
+                self.__objects.update({key: obj})
         except FileNotFoundError:
             pass
 
     def save(self) -> None:
         """save"""
+        saved_dict = {key: obj.to_dict()
+                      for key, obj in self.__objects.items()}
         with open(self.__file_path, "w", encoding="utf-8") as f:
-            dump(self.__objects, f)
+            dump(saved_dict, f)
 
     def new(self, obj) -> None:
         """new element is added to dic"""
         key: str = obj.__class__.__name__ + "." + obj.id
-        self.__objects.update({key: obj.to_dict()})
+        self.__objects.update({key: obj})
