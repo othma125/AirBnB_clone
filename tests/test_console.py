@@ -134,7 +134,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(out.getvalue().strip(), "")
 
     def test_create(self) -> None:
-        """ Test create"""
+        """Test that the create command creates
+        instances of the specified classes."""
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
             output = f.getvalue().strip()
@@ -142,6 +143,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create User")
             output = f.getvalue().strip()
@@ -149,6 +151,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create Place")
             output = f.getvalue().strip()
@@ -156,6 +159,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create State")
             output = f.getvalue().strip()
@@ -163,6 +167,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create City")
             output = f.getvalue().strip()
@@ -170,6 +175,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create Amenity")
             output = f.getvalue().strip()
@@ -177,6 +183,7 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create Review")
             output = f.getvalue().strip()
@@ -184,10 +191,12 @@ class TestConsole(unittest.TestCase):
                 uuid.UUID(output)
             except ValueError:
                 self.fail("Output is not a valid UUID")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create")
             output = f.getvalue().strip()
             self.assertEqual(output, "** class name missing **")
+
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create MyModel")
             output = f.getvalue().strip()
