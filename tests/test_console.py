@@ -1,17 +1,18 @@
+#!/usr/bin/python3
+""" Module that contains all possible tests for console """
 import uuid
 import os
-import unittest
 from io import StringIO
+from unittest import TestCase
 from unittest.mock import patch
 from console import HBNBCommand
 from models.engine.file_storage import FileStorage
 from models.user import User
 from models.place import Place
-from models.city import City
 import console
 
 
-class TestConsole(unittest.TestCase):
+class TestConsole(TestCase):
     def setUp(self):
         """ Create file at the beginning of every test"""
         try:
