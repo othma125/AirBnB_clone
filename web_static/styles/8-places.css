@@ -1,6 +1,13 @@
 .places h1 {
     font-size: 30px;
     margin-left: 10px;
+    width: 100%;
+}
+
+.places {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .places article {
@@ -41,12 +48,6 @@
     margin: 20px 0 5px 0;
     border-top: #DDDDDD solid 1px;
     margin-top: 25%;
-}
-
-.places div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .my_guest {
