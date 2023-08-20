@@ -18,3 +18,9 @@
     font-size: 30px;
     margin: auto;
 }
+
+.places div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
