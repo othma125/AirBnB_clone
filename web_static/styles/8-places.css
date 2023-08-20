@@ -14,6 +14,10 @@
     justify-content: center;
 }
 
+.places .article2 {
+    margin-left: 25%;
+}
+
 .places article h2 {
     font-size: 30px;
     margin: auto;
